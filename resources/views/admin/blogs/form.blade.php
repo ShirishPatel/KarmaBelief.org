@@ -1,0 +1,139 @@
+updated-code<form action="{{ isset($records) ? route('blogs.update', $records->id) : route('blogs.store') }}"
+    method="POST" enctype="multipart/form-data">
+    @csrf
+    @if (isset($records))
+        @method('PUT')
+    @endif
+    <h5>{{ isset($records) ? 'Edit' : 'Add' }} Blog</h5>
+    <div class="row row-cols-1 row-cols-lg-1 g-1">
+        <div class="col">
+            <div class="card border p-3 shadow-none">
+                <div class="row row-cols-1 row-cols-md-1 g-4">
+                    <div class="col-12">
+                    </div>
+                    <div class="col">
+                        <div class="row row-cols-1 row-cols-md-2 g-4">
+                            <x-form.image-upload label="Blog Image" name="featured_image" :required="true"
+                                :imagePath="isset($records->featured_image)
+        ? asset('storage/' . $records->featured_image)
+        : null" imageId="" size="300px X 300px" />
+                        </div>
+                    </div>
+
+                    @php
+                        $categories = DB::table('blog_categories')->where('status', '1')->get();
+                        $selectedCategories = old(
+                            'category_id',
+                            isset($records) ? explode(',', $records->category_id) : [],
+                        );
+                    @endphp
+
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="category_id" class="form-label">Blog Category</label>
+                            <select class="form-control selectpicker border" name="category_id[]" id="category_id"
+                                multiple data-live-search="true" data-actions-box="true" required>
+                                @foreach ($categories as $category)
+                                    <option value="{{ $category->id }}" {{ in_array($category->id, $selectedCategories) ? 'selected' : '' }}>
+                                        {{ $category->category_name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            <div class="form-text text-danger">{{ $errors->first('category_id') }}</div>
+                        </div>
+                    </div>
+
+
+                    <div class="col">
+                        <x-form.input label="Blog Title" placeholder="Blog Title" name="blog_title"
+                            value="{{ old('blog_title', $records->blog_title ?? '') }}" required="true" />
+                    </div>
+
+                    <x-display-checkbox :records="$records ?? null" />
+
+                    <div class="col-md-12 w-100 mt-4" x-data="serviceData()">
+                        <x-form.textarea label="Blog Description" class="editor-textarea" name="blog_description"
+                            :value="$records->blog_description ?? ''" :required="true" rows="5" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 mt-6">
+        <x-form.button :model="$records ?? null" />
+        <x-form.cancel-button href="{{ route('blogs.index') }}" />
+    </div>
+</form>
+
+@push('backend_scripts')
+    <script>
+        function serviceData() {
+            return {
+                init() {
+                    this.initializeTinyMCE();
+                },
+                initializeTinyMCE() {
+                    this.$nextTick(() => {
+                        tinymce.remove('.editor-textarea');
+                        tinymce.init({
+                            selector: '.editor-textarea',
+                            menubar: true,
+                            plugins: 'image link code lists advlist autolink table media',
+                            toolbar: 'undo redo | bold italic underline | alignleft aligncenter alignright | code | image | numlist bullist | link',
+                            images_upload_url: "{{ url('/blog-images-upload') }}",
+                            automatic_uploads: true,
+                            file_picker_types: 'image',
+                            images_upload_credentials: true,
+                            height: 400,
+                            file_picker_callback: (callback, value, meta) => {
+                                if (meta.filetype === 'image') {
+                                    const input = document.createElement('input');
+                                    input.setAttribute('type', 'file');
+                                    input.setAttribute('accept', 'image/*');
+                                    input.onchange = function () {
+                                        const file = this.files[0];
+                                        const reader = new FileReader();
+                                        reader.onload = () => {
+                                            const id = 'blobid' + (new Date()).getTime();
+                                            const blobCache = tinymce.activeEditor.editorUpload
+                                                .blobCache;
+                                            const base64 = reader.result.split(',')[1];
+                                            const blobInfo = blobCache.create(id, file, base64);
+                                            blobCache.add(blobInfo);
+                                            callback(blobInfo.blobUri(), {
+                                                alt: file.name
+                                            });
+                                        };
+                                        reader.readAsDataURL(file);
+                                    };
+                                    input.click();
+                                }
+                            },
+                        });
+                    });
+                },
+            };
+        }
+
+        function toggleAllPages(checkbox) {
+            const pageCheckboxes = document.querySelectorAll('.page-checkbox');
+            pageCheckboxes.forEach(cb => {
+                cb.checked = checkbox.checked;
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const pageCheckboxes = document.querySelectorAll('.page-checkbox');
+            const selectAllCheckbox = document.getElementById('selectAll');
+
+            pageCheckboxes.forEach(cb => {
+                cb.addEventListener('change', function () {
+                    selectAllCheckbox.checked = Array.from(pageCheckboxes).every(checkbox => checkbox.checked);
+                });
+            });
+
+            // Check if all pages are initially selected
+            selectAllCheckbox.checked = Array.from(pageCheckboxes).every(checkbox => checkbox.checked);
+        });
+    </script>
+@endpush
