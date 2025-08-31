@@ -81,7 +81,7 @@
                 <div class="col-xl-4">
                     <div class="service-three__item">
                         <div class="service-three__icon mb-20">
-                            <img src="http://localhost/KarmaBelief.org/public//assets/front/icons/donate.png" alt="icon">
+                            <img src="{{ asset('assets/images/data/img-2.png') }}" alt="icon">
                         </div>
                         <h3 class="mb-10"><a class='splt-txt wow' data-splitting href='service-details.html'>Give Donation
                             </a></h3>
@@ -93,7 +93,7 @@
                 <div class="col-xl-4">
                     <div class="service-three__item">
                         <div class="service-three__icon mb-20">
-                            <img src="http://localhost/KarmaBelief.org/public//assets/front/icons/inspira.png" alt="icon">
+                            <img src="{{ asset('assets/images/data/img-3.png') }}" alt="icon">
                         </div>
                         <h3 class="mb-10"><a class='splt-txt wow' data-splitting href='service-details.html'>Give
                                 Inspiration
@@ -106,7 +106,7 @@
                 <div class="col-xl-4">
                     <div class="service-three__item">
                         <div class="service-three__icon mb-20">
-                            <img src="http://localhost/KarmaBelief.org/public//assets/front/icons/volunteer.png" alt="icon">
+                            <img src="{{ asset('assets/images/data/img-4.png') }}" alt="icon">
                         </div>
                         <h3 class="mb-10"><a class='splt-txt wow' data-splitting href='service-details.html'>Become
                                 Volunteer
@@ -146,7 +146,7 @@
                     <div class="swiper-slide">
                         <div class="blog__item">
                             <div class="blog__image image">
-                                <img src="http://localhost/KarmaBelief.org/public//assets/front/gallery/FeaturedCauses/1.jpg"
+                                <img src="{{ asset('assets/images/data/img-5.jpg') }}"
                                     alt="Blog Image" style="height: 400px;">
                                 <div class="tag"
                                     style="position: absolute; top: 10px; left: 10px; right: 10px; display: flex; flex-wrap: wrap; gap: 5px;">
@@ -174,7 +174,7 @@
                     <div class="swiper-slide">
                         <div class="blog__item">
                             <div class="blog__image image">
-                                <img src="http://localhost/KarmaBelief.org/public//assets/front/gallery/FeaturedCauses/2.jpg"
+                                <img src="{{ asset('assets/images/data/img-6.jpg') }}"
                                     alt="Blog Image" style="height: 400px;">
                                 <div class="tag"
                                     style="position: absolute; top: 10px; left: 10px; right: 10px; display: flex; flex-wrap: wrap; gap: 5px;">
@@ -202,7 +202,7 @@
                     <div class="swiper-slide">
                         <div class="blog__item">
                             <div class="blog__image image">
-                                <img src="http://localhost/KarmaBelief.org/public//assets/front/gallery/FeaturedCauses/3.jpg"
+                                <img src="{{ asset('assets/images/data/img-7.jpg') }}"
                                     alt="Blog Image" style="height: 400px;">
                                 <div class="tag"
                                     style="position: absolute; top: 10px; left: 10px; right: 10px; display: flex; flex-wrap: wrap; gap: 5px;">
@@ -1711,7 +1711,7 @@
                                     nature and serving humanity.
                                 </p>
                                 <div class="d-flex gap-3 align-items-center mt-30 pt-30 bor-top">
-                                    <img src="http://localhost/KarmaBelief.org/public//assets/front/images/person_1.jpg"
+                                    <img src="{{ asset('assets/images/data/img-8.jpg') }}"
                                         alt="image"
                                         style="width: 60px; height: 60px; object-fit: cover; border-radius: 50%;">
                                     <div>
@@ -1742,7 +1742,7 @@
                                     and hope to those in need. Together, we can create a world where no one is left behind.
                                 </p>
                                 <div class="d-flex gap-3 align-items-center mt-30 pt-30 bor-top">
-                                    <img src="http://localhost/KarmaBelief.org/public//assets/front/images/person_2.jpg"
+                                    <img src="{{ asset('assets/images/data/img-9.jpg') }}"
                                         alt="image"
                                         style="width: 60px; height: 60px; object-fit: cover; border-radius: 50%;">
                                     <div>
@@ -1774,7 +1774,7 @@
                                     chance to thrive.
                                 </p>
                                 <div class="d-flex gap-3 align-items-center mt-30 pt-30 bor-top">
-                                    <img src="http://localhost/KarmaBelief.org/public//assets/front/images/person_3.jpg"
+                                    <img src="{{ asset('assets/images/data/img-10.jpg') }}"
                                         alt="image"
                                         style="width: 60px; height: 60px; object-fit: cover; border-radius: 50%;">
                                     <div>
