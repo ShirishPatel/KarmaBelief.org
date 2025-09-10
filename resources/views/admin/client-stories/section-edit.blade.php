@@ -10,41 +10,35 @@
                 @csrf
                 @method('PUT')
 
-                <div class="mb-3">
-                    <label>Client Image</label>
-                    <input type="file" name="client_image" class="form-control">
-                    @if ($data->client_image)
-                        <div class="mt-2">
-                            <img src="{{ asset('storage/' . $data->client_image) }}" height="80">
-                        </div>
-                    @endif
-                    @error('client_image')
-                        <small class="text-danger">{{ $message }}</small>
-                    @enderror
-                </div>
+                <div class="row row-cols-1 row-cols-md-2 g-3">
+                    <div class="w-100 mb-3">
+                        <x-form.image-upload name="client_image" imagePath="{{ asset('storage/' . $data->client_image) }}"
+                            :required="true" />
+                    </div>
+                    <div class="mb-3">
+                        <label>Client Name</label>
+                        <input type="text" name="client_name" value="{{ $data->client_name }}" class="form-control"
+                            required>
+                        @error('client_name')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
 
-                <div class="mb-3">
-                    <label>Client Name</label>
-                    <input type="text" name="client_name" value="{{ $data->client_name }}" class="form-control" required>
-                    @error('client_name')
-                        <small class="text-danger">{{ $message }}</small>
-                    @enderror
-                </div>
+                    <div class="mb-3">
+                        <label>Client Role</label>
+                        <input type="text" name="client_role" value="{{ $data->client_role }}" class="form-control">
+                        @error('client_role')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
 
-                <div class="mb-3">
-                    <label>Client Role</label>
-                    <input type="text" name="client_role" value="{{ $data->client_role }}" class="form-control">
-                    @error('client_role')
-                        <small class="text-danger">{{ $message }}</small>
-                    @enderror
-                </div>
-
-                <div class="mb-3">
-                    <label>Client Heading</label>
-                    <input type="text" name="client_heading" value="{{ $data->client_heading }}" class="form-control">
-                    @error('client_heading')
-                        <small class="text-danger">{{ $message }}</small>
-                    @enderror
+                    <div class="w-100 mb-4">
+                        <label>Descriptions <x-required /> </label>
+                        <textarea name="client_heading" class="form-control" rows="5">{{$data->client_heading}}</textarea>
+                        @error('client_heading')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
                 </div>
 
                 <button type="submit" class="btn btn-success">Update</button>

@@ -20,30 +20,6 @@ updated-code<form action="{{ isset($records) ? route('blogs.update', $records->i
                         </div>
                     </div>
 
-                    @php
-                        $categories = DB::table('blog_categories')->where('status', '1')->get();
-                        $selectedCategories = old(
-                            'category_id',
-                            isset($records) ? explode(',', $records->category_id) : [],
-                        );
-                    @endphp
-
-                    <div class="col">
-                        <div class="form-group">
-                            <label for="category_id" class="form-label">Blog Category</label>
-                            <select class="form-control selectpicker border" name="category_id[]" id="category_id"
-                                multiple data-live-search="true" data-actions-box="true" required>
-                                @foreach ($categories as $category)
-                                    <option value="{{ $category->id }}" {{ in_array($category->id, $selectedCategories) ? 'selected' : '' }}>
-                                        {{ $category->category_name }}
-                                    </option>
-                                @endforeach
-                            </select>
-                            <div class="form-text text-danger">{{ $errors->first('category_id') }}</div>
-                        </div>
-                    </div>
-
-
                     <div class="col">
                         <x-form.input label="Blog Title" placeholder="Blog Title" name="blog_title"
                             value="{{ old('blog_title', $records->blog_title ?? '') }}" required="true" />

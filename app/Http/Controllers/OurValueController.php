@@ -15,7 +15,6 @@ class OurValueController extends Controller
     public function sectionStore(Request $request)
     {
         $request->validate([
-            'tag_title'   => 'nullable|string|max:255',
             'heading'     => 'nullable|string|max:255',
             'description' => 'nullable|string',
         ]);
@@ -26,23 +25,21 @@ class OurValueController extends Controller
             DB::table('our_values_sections')
                 ->where('id', $existing->id)
                 ->update([
-                    'tag_title'   => $request->tag_title,
                     'heading'     => $request->heading,
                     'description' => $request->description,
                     'user_id'     => auth()->id(),
                     'updated_at'  => now(),
                 ]);
-            $message = 'Our Values section updated successfully.';
+            $message = 'Record updated successfully.';
         } else {
             DB::table('our_values_sections')->insert([
-                'tag_title'   => $request->tag_title,
                 'heading'     => $request->heading,
                 'description' => $request->description,
                 'user_id'     => auth()->id(),
                 'created_at'  => now(),
                 'updated_at'  => now(),
             ]);
-            $message = 'Our Values section created successfully.';
+            $message = 'Record created successfully.';
         }
 
         return back()->with('success', $message);
@@ -56,9 +53,9 @@ class OurValueController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'heading'     => 'nullable|string|max:255',
-            'description' => 'nullable|string',
-            'image'       => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
+            'heading'     => 'required|string|max:255',
+            'description' => 'required|string',
+            'image'       => 'required|image|mimes:jpeg,png,jpg,webp|max:2048',
         ]);
 
         $imagePath = null;
@@ -90,9 +87,9 @@ class OurValueController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'heading'     => 'nullable|string|max:255',
-            'description' => 'nullable|string',
-            'image'       => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
+            'heading'     => 'required|string|max:255',
+            'description' => 'required|string',
+            'image'       => 'required|image|mimes:jpeg,png,jpg,webp|max:2048',
         ]);
 
         $value = DB::table('our_values')->where('id', $id)->first();

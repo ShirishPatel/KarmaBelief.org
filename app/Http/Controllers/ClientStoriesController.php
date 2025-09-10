@@ -8,7 +8,7 @@ class ClientStoriesController extends Controller
 {
     public function index()
     {
-        $value       = DB::table('client_stories')->first();
+        $value = DB::table('client_stories')->first();
         $clientValue = DB::table('client_stories_section')->get();
         return view('admin.client-stories.index', compact('value', 'clientValue'));
     }
@@ -17,8 +17,7 @@ class ClientStoriesController extends Controller
     {
         $request->validate([
             'heading' => 'required|string|max:255',
-            'title'   => 'required|string|max:255',
-            'disc'    => 'required|string',
+            'disc' => 'required|string',
         ]);
 
         $existing = DB::table('client_stories')->first();
@@ -27,19 +26,17 @@ class ClientStoriesController extends Controller
             DB::table('client_stories')
                 ->where('id', $existing->id)
                 ->update([
-                    'heading'    => $request->heading,
-                    'title'      => $request->title,
-                    'disc'       => $request->disc,
-                    'user_id'    => auth()->id(),
+                    'heading' => $request->heading,
+                    'disc' => $request->disc,
+                    'user_id' => auth()->id(),
                     'updated_at' => now(),
                 ]);
             $message = 'Updated Successfully';
         } else {
             DB::table('client_stories')->insert([
-                'heading'    => $request->heading,
-                'title'      => $request->title,
-                'disc'       => $request->disc,
-                'user_id'    => auth()->id(),
+                'heading' => $request->heading,
+                'disc' => $request->disc,
+                'user_id' => auth()->id(),
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
@@ -57,10 +54,16 @@ class ClientStoriesController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'client_image'   => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-            'client_name'    => 'required|string|max:255',
-            'client_heading' => 'nullable|string|max:255',
-            'client_role'    => 'nullable|string|max:255',
+            'client_image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'client_name' => 'required|unique:client_stories_section|string|max:255',
+            'client_role' => 'required|string|max:255',
+            'client_heading' => 'required',
+        ], [
+            'client_image.required' => 'Image is required.',
+            'client_name.required' => 'Name is required.',
+            'client_name.unique' => 'Name already exists.',
+            'client_role.required' => 'Description is required.',
+            'client_heading.required' => 'Heading is required.',
         ]);
 
         $imagePath = null;
@@ -69,14 +72,14 @@ class ClientStoriesController extends Controller
         }
 
         DB::table('client_stories_section')->insert([
-            'client_image'   => $imagePath,
-            'client_name'    => $request->client_name,
+            'client_image' => $imagePath,
+            'client_name' => $request->client_name,
             'client_heading' => $request->client_heading,
-            'client_role'    => $request->client_role,
-            'client_status'  => 1,
-            'user_id'        => auth()->id(),
-            'created_at'     => now(),
-            'updated_at'     => now(),
+            'client_role' => $request->client_role,
+            'client_status' => 1,
+            'user_id' => auth()->id(),
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
 
         return redirect()->route('client-stories-section.index')->with('success', 'Client story added successfully.');
@@ -86,7 +89,7 @@ class ClientStoriesController extends Controller
     {
         $data = DB::table('client_stories_section')->where('id', $id)->first();
 
-        if (! $data) {
+        if (!$data) {
             return redirect()->route('client-stories-section.index')->with('error', 'Record not found');
         }
 
@@ -96,13 +99,19 @@ class ClientStoriesController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'client_image'   => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-            'client_name'    => 'required|string|max:255',
-            'client_heading' => 'nullable|string|max:255',
-            'client_role'    => 'nullable|string|max:255',
+            'client_image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'client_name' => 'required|string|max:255|unique:client_stories_section,client_name,' . $id,
+            'client_role' => 'required|string|max:255',
+            'client_heading' => 'required',
+        ], [
+            'client_image.required' => 'Image is required.',
+            'client_name.required' => 'Name is required.',
+            'client_name.unique' => 'Name already exists.',
+            'client_role.required' => 'Description is required.',
+            'client_heading.required' => 'Heading is required.',
         ]);
 
-        $record    = DB::table('client_stories_section')->where('id', $id)->first();
+        $record = DB::table('client_stories_section')->where('id', $id)->first();
         $imagePath = $record->client_image;
 
         if ($request->hasFile('client_image')) {
@@ -110,11 +119,11 @@ class ClientStoriesController extends Controller
         }
 
         DB::table('client_stories_section')->where('id', $id)->update([
-            'client_image'   => $imagePath,
-            'client_name'    => $request->client_name,
+            'client_image' => $imagePath,
+            'client_name' => $request->client_name,
             'client_heading' => $request->client_heading,
-            'client_role'    => $request->client_role,
-            'updated_at'     => now(),
+            'client_role' => $request->client_role,
+            'updated_at' => now(),
         ]);
 
         return redirect()->route('client-stories-section.index')->with('success', 'Client story updated successfully.');

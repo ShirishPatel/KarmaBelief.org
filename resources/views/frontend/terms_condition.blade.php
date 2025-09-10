@@ -11,11 +11,8 @@
     <section class="banner-inner-area">
         <div class="container">
             <div class="banner-inner__content">
-                <a href='index.html'>home</a><span>/Services</span>
-                <h2>Services</h2>
-                <p>We will help a client's problems to develop the products they have with high quality Change
-                    the
-                    appearance.</p>
+                <a href='{{ route('home') }}'>home</a><span>/{{ $records->terms_title }}</span>
+                <h2>{{ $records->terms_title }}</h2>
             </div>
         </div>
     </section>
@@ -26,7 +23,7 @@
             {!! $records->description !!}
         </div>
     </section>
-   
+
 @endsection
 
 @push('frontend_scripts')

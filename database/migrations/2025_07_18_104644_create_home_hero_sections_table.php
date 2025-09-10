@@ -19,8 +19,6 @@ return new class extends Migration
             $table->text('image');
             $table->string('btn_label_1');
             $table->string('btn_link_1');
-            $table->string('btn_label_2');
-            $table->string('btn_link_2');
               $table->string('user_id');
             $table->timestamps();
         });

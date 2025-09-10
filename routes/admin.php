@@ -64,14 +64,14 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     //Hero section
     Route::resource('home-hero-sections', HomeHeroSectionController::class);
     //our values
-    Route::get('our-value-sections', [OurValueController::class, 'sectionIndex'])->name('our-value-sections.index');
-    Route::post('our-value-sections/store', [OurValueController::class, 'sectionStore'])->name('our-value-sections.store');
+    Route::get('causes', [OurValueController::class, 'sectionIndex'])->name('our-value-sections.index');
+    Route::post('causes/store', [OurValueController::class, 'sectionStore'])->name('our-value-sections.store');
 
-    Route::resource('our-value', OurValueController::class);
+    Route::resource('major-causes', OurValueController::class)->names('our-value');
     //smart solutions
     Route::get('smart-solution-sections', [SmartSolutionController::class, 'index'])->name('smart-solution-sections.index');
     Route::post('smart-solution-sections/store', [SmartSolutionController::class, 'smartstore'])->name('smart-solution-sections.store');
-    Route::resource('solutions', SmartSolutionController::class);
+    Route::resource('featured-causes', SmartSolutionController::class)->names('solutions');
 
     //whychoose us
     Route::resource('why-choose-us-list', WhyChooseUsController::class);

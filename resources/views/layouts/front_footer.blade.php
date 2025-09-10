@@ -74,12 +74,17 @@
             </div>
             <div class="footer__item">
                 <h3>Policies</h3>
+                @php
+                    $policies = DB::table('terms')->where('status', '1')->get();
+                @endphp
                 <ul>
-                    <li><a target="_blank" href="#0">Terms</a></li>
-                    <li><a target="_blank" href="#0">Privacy</a></li>
-                    <li><a target="_blank" href="#0">Disclaimer</a></li>
-                    <li><a target="_blank" href="#0">Refund</a></li>
-                    <li><a target="_blank" href="#0">Cookies</a></li>
+                    @foreach ($policies as $page)
+                        <li>
+                            <a target="_blank" href=" {{ route('terms_condition', $page->terms_slug) }}">
+                                {{ $page->terms_title }}
+                            </a>
+                        </li>
+                    @endforeach
                 </ul>
             </div>
             <div class="footer__item footer-subscribe">
@@ -139,15 +144,15 @@
                 Ahmedabad, India</a>
             {{-- <p>
                 @php
-                    $pages = DB::table('terms')->where('status', '1')->get();
+                $pages = DB::table('terms')->where('status', '1')->get();
                 @endphp
 
                 @if ($pages->isNotEmpty())
-                    @foreach ($pages as $page)
-                        <a href="{{ route('terms_condition', $page->terms_slug) }}" class="text-blue">
-                            {{ $page->terms_title }} @if (!$loop->last) @endif
-                        </a>
-                    @endforeach
+                @foreach ($pages as $page)
+                <a href="{{ route('terms_condition', $page->terms_slug) }}" class="text-blue">
+                    {{ $page->terms_title }} @if (!$loop->last) @endif
+                </a>
+                @endforeach
                 @endif
             </p> --}}
         </div>

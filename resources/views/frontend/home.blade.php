@@ -7,40 +7,25 @@
     </style>
 @endpush
 @section('front_content')
-    <!-- Banner area start here -->
-    @php
-        $record = DB::table('home_hero_sections')->first();
-    @endphp
 
-    @if (
-            $record &&
-            ($record->tag_line ||
-                $record->heading ||
-                $record->description ||
-                $record->btn_label_1 ||
-                $record->btn_label_2 ||
-                $record->image)
-        )
+    <!-- Hero Section start here -->
+    @isset($heroSection)
         <section class="banner-three-area paralax__animation bg-transparent" style="background: #ffffff;">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="banner-three__content">
                             <span class="wow splt-txt" data-splitting>
-                                Serving Humanity, Everywhere We Go.
+                                {{ $heroSection->tag_line }}
                                 <img src="{{ asset('assets/images/icon/roket.png') }}" alt="icon">
                             </span>
 
                             <h1 class="wow fadeInUp" data-wow-delay="400ms" data-wow-duration="1500ms">
-                                We are nonprofit team and work worldwide
+                                {{ $heroSection->heading }}
                             </h1>
 
                             <p class="wow fadeInUp" data-wow-delay="600ms" data-wow-duration="1500ms">
-                                Their multiply doesn't behold shall appear living heaven second roo lights. Itself hath thing
-                                for won't herb forth gathered good bear fowl kind give fly form winged for reason
-
-                                Their multiply doesn't behold shall appear living heaven second roo lights. Itself hath thing
-                                for won't herb forth gathered good bear fowl kind give fly form winged for reason
+                                {{ $heroSection->description }}
                             </p>
 
                             <div class="d-flex align-items-center gap-3 pt-40">
@@ -54,183 +39,102 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="col-lg-6">
                         <img class="wow bounceInRight" data-wow-delay="200ms" data-wow-duration="2000ms"
-                            src="{{ asset('assets/images/data/img-1.png') }}" alt="image">
-                        {{-- <img class="wow bounceInRight" data-wow-delay="200ms" data-wow-duration="2000ms"
-                            src="{{ asset('storage/' . $record->image) }}" alt="image"> --}}
+                            src="{{ asset('storage/' . $heroSection->image) }}" alt="Section image">
                     </div>
                 </div>
             </div>
         </section>
-    @endif
+    @endisset
+    <!-- Hero Section end here -->
 
-    <!-- Service area start here -->
-    <section class="service-three-area pt-120 pb-120" style="background-color: #fb6f1312">
-        <div class="container">
-            <div class="section-header mb-80 text-center">
-                <h2 class="fw-600 wow splt-txt" data-splitting>
-                    Our Major Causes
-                </h2>
-                <p class="wow fadeInUp" data-wow-delay="200ms" data-wow-duration="1500ms">
-                    Creepeth called face upon face yielding midst is after moveth
-                </p>
-            </div>
-            <div class="row g-4">
-                <div class="col-xl-4">
-                    <div class="service-three__item">
-                        <div class="service-three__icon mb-20">
-                            <img src="{{ asset('assets/images/data/img-2.png') }}" alt="icon">
-                        </div>
-                        <h3 class="mb-10"><a class='splt-txt wow' data-splitting href='service-details.html'>Give Donation
-                            </a></h3>
-                        <p>It you're. Was called you're fowl grass lesser land together waters beast darkness earth land
-                            whose male all moveth fruitful.
-                        </p>
-                    </div>
-                </div>
-                <div class="col-xl-4">
-                    <div class="service-three__item">
-                        <div class="service-three__icon mb-20">
-                            <img src="{{ asset('assets/images/data/img-3.png') }}" alt="icon">
-                        </div>
-                        <h3 class="mb-10"><a class='splt-txt wow' data-splitting href='service-details.html'>Give
-                                Inspiration
-                            </a></h3>
-                        <p>It you're. Was called you're fowl grass lesser land together waters beast darkness earth land
-                            whose male all moveth fruitful.
-                        </p>
-                    </div>
-                </div>
-                <div class="col-xl-4">
-                    <div class="service-three__item">
-                        <div class="service-three__icon mb-20">
-                            <img src="{{ asset('assets/images/data/img-4.png') }}" alt="icon">
-                        </div>
-                        <h3 class="mb-10"><a class='splt-txt wow' data-splitting href='service-details.html'>Become
-                                Volunteer
-                            </a></h3>
-                        <p>It you're. Was called you're fowl grass lesser land together waters beast darkness earth land
-                            whose male all moveth fruitful.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Service area end here -->
-
-    <section class="blog-area pb-120 pt-120">
-        <div class="container">
-            <div class="section-header-flex mb-80">
-                <h2 class="fw-600 splt-txt wow" data-splitting>Featured Causes
-                </h2>
-                <div class="wow fadeInUp" data-wow-delay="200ms" data-wow-duration="1500ms">
-                    <p>
-                        Creepeth called face upon face yielding midst is after moveth
+    <!-- Causes start here -->
+    @isset($causes)
+        <section class="service-three-area pt-120 pb-120" style="background-color: #fb6f1312">
+            <div class="container">
+                <div class="section-header mb-80 text-center">
+                    <h2 class="fw-600 wow splt-txt" data-splitting>
+                        {{ $causes->heading }}
+                    </h2>
+                    <p class="wow fadeInUp" data-wow-delay="200ms" data-wow-duration="1500ms">
+                        {{ $causes->description }}
                     </p>
-                    <div class="swiper__info justify-content-start m-0 mt-3">
-                        <button class="blog__arry-prev">
-                            <i class="fa-regular fa-arrow-left-long"></i>
-                        </button>
-                        <button class="blog__arry-next active">
-                            <i class="fa-regular fa-arrow-right-long"></i>
-                        </button>
-                    </div>
+                </div>
+                <div class="row g-4">
+                    @foreach ($causeValues as $values)
+                        <div class="col-xl-4">
+                            <div class="service-three__item">
+                                <div class="service-three__icon mb-20">
+                                    <img src="{{ asset('storage/' . $values->image) }}" alt="icon">
+                                </div>
+                                <h3 class="mb-10">{{ $values->heading }}</h3>
+                                <p>{{ $values->description }}</p>
+                            </div>
+                        </div>
+                    @endforeach
                 </div>
             </div>
+        </section>
+    @endisset
+    <!-- Causes end here -->
 
-            <div class="swiper blog__slider">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                        <div class="blog__item">
-                            <div class="blog__image image">
-                                <img src="{{ asset('assets/images/data/img-5.jpg') }}"
-                                    alt="Blog Image" style="height: 400px;">
-                                <div class="tag"
-                                    style="position: absolute; top: 10px; left: 10px; right: 10px; display: flex; flex-wrap: wrap; gap: 5px;">
-                                    <h5 class="bg-white px-2 py-1 rounded">
-                                        100 Donors
-                                    </h5>
-                                </div>
-                            </div>
-                            <h4 class="mt-10 mb-20">
-                                <a class="primary-hover" href="">
-                                    Education for every child
-                                </a>
-                            </h4>
-                            <p class="mt-10 mb-20">
-                                <a class="primary-hover" href="">
-                                    Be tree their face won't appear day waters moved fourth in they're divide don't a you
-                                    were man face god.
-                                </a>
-                            </p>
-                            <a class="btn-three mb-20">
-                                Donate <i class="fa-regular fa-arrow-right"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="blog__item">
-                            <div class="blog__image image">
-                                <img src="{{ asset('assets/images/data/img-6.jpg') }}"
-                                    alt="Blog Image" style="height: 400px;">
-                                <div class="tag"
-                                    style="position: absolute; top: 10px; left: 10px; right: 10px; display: flex; flex-wrap: wrap; gap: 5px;">
-                                    <h5 class="bg-white px-2 py-1 rounded">
-                                        100 Donors
-                                    </h5>
-                                </div>
-                            </div>
-                            <h4 class="mt-10 mb-20">
-                                <a class="primary-hover" href="">
-                                    Education for every child
-                                </a>
-                            </h4>
-                            <p class="mt-10 mb-20">
-                                <a class="primary-hover" href="">
-                                    Be tree their face won't appear day waters moved fourth in they're divide don't a you
-                                    were man face god.
-                                </a>
-                            </p>
-                            <a class="btn-three mb-20">
-                                Donate <i class="fa-regular fa-arrow-right"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="blog__item">
-                            <div class="blog__image image">
-                                <img src="{{ asset('assets/images/data/img-7.jpg') }}"
-                                    alt="Blog Image" style="height: 400px;">
-                                <div class="tag"
-                                    style="position: absolute; top: 10px; left: 10px; right: 10px; display: flex; flex-wrap: wrap; gap: 5px;">
-                                    <h5 class="bg-white px-2 py-1 rounded">
-                                        100 Donors
-                                    </h5>
-                                </div>
-                            </div>
-                            <h4 class="mt-10 mb-20">
-                                <a class="primary-hover" href="">
-                                    Education for every child
-                                </a>
-                            </h4>
-                            <p class="mt-10 mb-20">
-                                <a class="primary-hover" href="">
-                                    Be tree their face won't appear day waters moved fourth in they're divide don't a you
-                                    were man face god.
-                                </a>
-                            </p>
-                            <a class="btn-three mb-20">
-                                Donate <i class="fa-regular fa-arrow-right"></i>
-                            </a>
+    @isset($solutions)
+        <section class="blog-area pb-120 pt-120">
+            <div class="container">
+                <div class="section-header-flex mb-80">
+                    <h2 class="fw-600 splt-txt wow" data-splitting>
+                        {{ $smartSolution->solution_heading ?? '' }}
+                    </h2>
+                    <div class="wow fadeInUp" data-wow-delay="200ms" data-wow-duration="1500ms">
+                        <p>{{ $smartSolution->solution_description ?? '' }}</p>
+                        <div class="swiper__info justify-content-start m-0 mt-3">
+                            <button class="blog__arry-prev">
+                                <i class="fa-regular fa-arrow-left-long"></i>
+                            </button>
+                            <button class="blog__arry-next active">
+                                <i class="fa-regular fa-arrow-right-long"></i>
+                            </button>
                         </div>
                     </div>
                 </div>
+
+                <div class="swiper blog__slider">
+                    <div class="swiper-wrapper">
+                        @foreach ($solutions as $solution)
+                            <div class="swiper-slide">
+                                <div class="blog__item">
+                                    <div class="blog__image image">
+                                        <img src="{{ asset('storage/' . $solution->smart_image) }}" alt="Blog Image"
+                                            style="height: 400px;">
+                                        <div class="tag"
+                                            style="position: absolute; top: 10px; left: 10px; right: 10px; display: flex; flex-wrap: wrap; gap: 5px;">
+                                            <h5 class="bg-white px-2 py-1 rounded">
+                                                {{ $solution->smart_title }}
+                                            </h5>
+                                        </div>
+                                    </div>
+                                    <h4 class="mt-10 mb-20">
+                                        <a class="primary-hover" href="{{ $solution->btn_link ?? 'javascript:void(0)' }}">
+                                            {{ $solution->smart_heading }}
+                                        </a>
+                                    </h4>
+                                    <p class="mt-10 mb-20">
+                                        <a class="primary-hover" href="{{ $solution->btn_link ?? 'javascript:void(0)' }}">
+                                            {{ $solution->data }}
+                                        </a>
+                                    </p>
+                                    <a class="btn-three mb-20" href="{{ $solution->btn_link ?? 'javascript:void(0)' }}">
+                                        {{ $solution->btn_label }} <i class="fa-regular fa-arrow-right"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
+    @endisset
 
     <!-- Feature area start here -->
     @php
@@ -244,7 +148,6 @@
             <div class="feature-three__container" style="background-color: #fb6f1312">
                 <div class="d-flex flex-wrap mb-80 justify-content-between align-items-end gap-3">
                     <div class="section-header">
-                        <h5 class="wow splt-txt" data-splitting>{{ $sections->tag_title }}</h5>
                         <h2 class="fw-600 wow splt-txt" data-splitting>{{ $sections->heading }}</h2>
                     </div>
                     <p class="wow fadeInUp" data-wow-delay="200ms" data-wow-duration="1500ms">
@@ -1681,131 +1584,67 @@
     </section>
     <!-- Start main services area end here -->
 
+
     <!-- Testimonial area start here -->
-    <section class="testimonial-three-area pb-120 pt-120">
-        <div class="container">
-            <div class="section-header mb-80 text-center">
-                <h2 class="fw-600 wow splt-txt" data-splitting>INITIAL DONATIONS</h2>
-                <p class="wow fadeInUp col-md-6 mx-auto" data-wow-delay="200ms" data-wow-duration="1500ms">
-                    Dive into the success stories of Vibrant Software Technologies's clients—where
-                    digital dreams become reality.
-                </p>
-            </div>
+    @isset($donations)
+        <section class="testimonial-three-area pb-120 pt-120">
+            <div class="container">
+                <div class="section-header mb-80 text-center">
+                    <h2 class="fw-600 wow splt-txt" data-splitting>INITIAL DONATIONS</h2>
+                    <p class="wow fadeInUp col-md-6 mx-auto" data-wow-delay="200ms" data-wow-duration="1500ms">
+                        Dive into the success stories of Vibrant Software Technologies's clients—where
+                        digital dreams become reality.
+                    </p>
+                </div>
 
-            <div class="swiper testimonial-three__slider">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                        <div class="testimonial-three__item-wrp">
-                            <div class="testimonial-three__item">
-                                <div class="coma-top">
-                                    <img src="{{ asset('assets/images/icon/testimonial-three-coma-top.png') }}" alt="icon">
-                                </div>
-                                <div class="coma-bottom">
-                                    <img src="{{ asset('assets/images/icon/testimonial-three-coma-bottom.png') }}"
-                                        alt="icon">
-                                </div>
-                                <p>
-                                    A heartfelt thank you for the generous donation of ₹50,001 towards our Tree Plantation
-                                    initiative. This contribution will help us plant and nurture trees, creating a greener
-                                    and healthier tomorrow. Your support inspires us to continue our mission of protecting
-                                    nature and serving humanity.
-                                </p>
-                                <div class="d-flex gap-3 align-items-center mt-30 pt-30 bor-top">
-                                    <img src="{{ asset('assets/images/data/img-8.jpg') }}"
-                                        alt="image"
-                                        style="width: 60px; height: 60px; object-fit: cover; border-radius: 50%;">
-                                    <div>
-                                        <h5 class="mt-0 mb-1">
-                                            Shirish Patel
-                                        </h5>
-                                        <p class="mb-0">
-                                            Donor
+                <div class="swiper testimonial-three__slider">
+                    <div class="swiper-wrapper">
+                        @foreach ($donations as $donation)
+                            <div class="swiper-slide">
+                                <div class="testimonial-three__item-wrp">
+                                    <div class="testimonial-three__item">
+                                        <div class="coma-top">
+                                            <img src="{{ asset('assets/images/icon/testimonial-three-coma-top.png') }}" alt="icon">
+                                        </div>
+                                        <div class="coma-bottom">
+                                            <img src="{{ asset('assets/images/icon/testimonial-three-coma-bottom.png') }}"
+                                                alt="icon">
+                                        </div>
+                                        <p>
+                                            {{ $donation->client_heading }}
                                         </p>
+                                        <div class="d-flex gap-3 align-items-center mt-30 pt-30 bor-top">
+                                            <img src="{{ asset('storage/' . $donation->client_image) }}" alt="image"
+                                                style="width: 60px; height: 60px; object-fit: cover; border-radius: 50%;">
+                                            <div>
+                                                <h5 class="mt-0 mb-1">
+                                                    {{ $donation->client_name }}
+                                                </h5>
+                                                <p class="mb-0">
+                                                    {{ $donation->client_role }}
+                                                </p>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        @endforeach
                     </div>
-                    <div class="swiper-slide">
-                        <div class="testimonial-three__item-wrp">
-                            <div class="testimonial-three__item">
-                                <div class="coma-top">
-                                    <img src="{{ asset('assets/images/icon/testimonial-three-coma-top.png') }}" alt="icon">
-                                </div>
-                                <div class="coma-bottom">
-                                    <img src="{{ asset('assets/images/icon/testimonial-three-coma-bottom.png') }}"
-                                        alt="icon">
-                                </div>
-                                <p>
-                                    We sincerely thank you for the generous donation of ₹50,001 towards providing food,
-                                    clothing, and essentials to homeless individuals. Your kindness brings comfort, dignity,
-                                    and hope to those in need. Together, we can create a world where no one is left behind.
-                                </p>
-                                <div class="d-flex gap-3 align-items-center mt-30 pt-30 bor-top">
-                                    <img src="{{ asset('assets/images/data/img-9.jpg') }}"
-                                        alt="image"
-                                        style="width: 60px; height: 60px; object-fit: cover; border-radius: 50%;">
-                                    <div>
-                                        <h5 class="mt-0 mb-1">
-                                            Jigisha Patel
-                                        </h5>
-                                        <p class="mb-0">
-                                            Donor
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="testimonial-three__item-wrp">
-                            <div class="testimonial-three__item">
-                                <div class="coma-top">
-                                    <img src="{{ asset('assets/images/icon/testimonial-three-coma-top.png') }}" alt="icon">
-                                </div>
-                                <div class="coma-bottom">
-                                    <img src="{{ asset('assets/images/icon/testimonial-three-coma-bottom.png') }}"
-                                        alt="icon">
-                                </div>
-                                <p>
-                                    We deeply appreciate the generous donation of ₹50,001 towards helping the disabled. Your
-                                    support empowers differently-abled individuals with care, dignity, and opportunities to
-                                    live a better life. Together, we can build an inclusive society where everyone has the
-                                    chance to thrive.
-                                </p>
-                                <div class="d-flex gap-3 align-items-center mt-30 pt-30 bor-top">
-                                    <img src="{{ asset('assets/images/data/img-10.jpg') }}"
-                                        alt="image"
-                                        style="width: 60px; height: 60px; object-fit: cover; border-radius: 50%;">
-                                    <div>
-                                        <h5 class="mt-0 mb-1">
-                                            Bipinbhai Patel
-                                        </h5>
-                                        <p class="mb-0">
-                                            Donor
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
+                    <div class="mt-60">
+                        <div class="swiper__info">
+                            <button class="testimonial-three__arry-prev">
+                                <i class="fa-regular fa-arrow-left-long"></i>
+                            </button>
+                            <div class="dot testimonial-three__dot"></div>
+                            <button class="testimonial-three__arry-next">
+                                <i class="fa-regular fa-arrow-right-long"></i>
+                            </button>
                         </div>
                     </div>
                 </div>
-
-                <div class="mt-60">
-                    <div class="swiper__info">
-                        <button class="testimonial-three__arry-prev">
-                            <i class="fa-regular fa-arrow-left-long"></i>
-                        </button>
-                        <div class="dot testimonial-three__dot"></div>
-                        <button class="testimonial-three__arry-next">
-                            <i class="fa-regular fa-arrow-right-long"></i>
-                        </button>
-                    </div>
-                </div>
             </div>
-        </div>
-    </section>
-
+        </section>
+    @endisset
     <!-- Testimonial area end here -->
 
     <!-- Blog area start here -->
@@ -2341,8 +2180,6 @@
         </div>
     </section>
     <!-- Tools and technologies area end here -->
-
-   
 @endsection
 
 @push('frontend_scripts')

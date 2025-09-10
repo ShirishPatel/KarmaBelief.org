@@ -19,7 +19,23 @@ class FrontEndController extends Controller
             ->where('status', '1')
             ->get();
 
-        return view('frontend.home', compact('services', 'categories'));
+        $heroSection = DB::table('home_hero_sections')->first();
+        $causes = DB::table('our_values_sections')->first();
+        $causeValues = DB::table('our_values')->get();
+        $smartSolution = DB::table('smart_solutions')->first();
+        $solutions = DB::table('solutions')->where('status', '1')->get();
+        $donations = DB::table('client_stories_section')->where('client_status', '1')->get();
+
+        return view('frontend.home', compact(
+            'services',
+            'categories',
+            'heroSection',
+            'causes',
+            'causeValues',
+            'smartSolution',
+            'solutions',
+            'donations',
+        ));
     }
     public function about_us()
     {

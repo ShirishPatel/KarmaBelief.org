@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('our_values_sections', function (Blueprint $table) {
             $table->id();
-            $table->string('tag_title');
             $table->string('heading');
             $table->text('description');
             $table->string('user_id');

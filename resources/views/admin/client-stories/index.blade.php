@@ -1,20 +1,20 @@
 @extends('layouts.admin')
-@section('title', 'Our Client Stories')
+@section('title', 'Initial Donations')
 @section('backend_content')
     <div class="col-xl-12">
-        <h6 class="text-body-secondary">Our Client Stories</h6>
+        <h6 class="text-body-secondary">Initial Donations</h6>
         <div class="nav-align-top nav-tabs-shadow">
             <ul class="nav nav-tabs" role="tablist">
                 <li class="nav-item" role="presentation">
                     <button type="button" class="nav-link active" role="tab" data-bs-toggle="tab"
                         data-bs-target="#main-section" aria-controls="main-section" aria-selected="true">
-                        Client Stories
+                        Initial Donations Section
                     </button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button type="button" class="nav-link" role="tab" data-bs-toggle="tab"
-                        data-bs-target="#list-section" aria-controls="list-section" aria-selected="false">
-                        Client Stories Section
+                    <button type="button" class="nav-link" role="tab" data-bs-toggle="tab" data-bs-target="#list-section"
+                        aria-controls="list-section" aria-selected="false">
+                        Initial Donations 
                     </button>
                 </li>
             </ul>
@@ -23,7 +23,6 @@
 
                 <div class="tab-pane fade active show" id="main-section" role="tabpanel">
                     <div class="container mt-4">
-                        <h5>Client Stories</h5>
                         @if (session('success'))
                             <div class="alert alert-success">{{ session('success') }}</div>
                         @endif
@@ -41,17 +40,9 @@
                             </div>
 
                             <div class="mb-3">
-                                <label>Title</label>
-                                <input type="text" name="title" class="form-control"
-                                    value="{{ old('title', $value->title ?? '') }}">
-                                @error('title')
-                                    <small class="text-danger">{{ $message }}</small>
-                                @enderror
-                            </div>
-
-                            <div class="mb-3">
                                 <label>Description </label>
-                                <textarea name="disc" class="form-control" rows="4">{{ old('disc', $value->disc ?? '') }}</textarea>
+                                <textarea name="disc" class="form-control"
+                                    rows="4">{{ old('disc', $value->disc ?? '') }}</textarea>
                                 @error('disc')
                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror
@@ -66,7 +57,7 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header d-flex justify-content-between align-items-center">
-                                <h5 class="mb-0">Client Stories Section</h5>
+                                <h5 class="mb-0">Initial Donations List</h5>
                                 <a href="{{ route('client-stories-section.create') }}"
                                     class="btn btn-success btn-sm">Create</a>
                             </div>
@@ -88,8 +79,7 @@
                                                 <tr>
                                                     <td>
                                                         @if ($value->client_image)
-                                                            <img src="{{ asset('storage/' . $value->client_image) }}"
-                                                                height="50">
+                                                            <img src="{{ asset('storage/' . $value->client_image) }}" height="50">
                                                         @endif
                                                     </td>
                                                     <td>{{ $value->client_name }}</td>
@@ -112,8 +102,7 @@
                                                             data-toggle="tooltip" data-placement="top" title="Edit Record">
                                                             <i class="tf-icons bx bxs-edit"></i>
                                                         </a>
-                                                        <form
-                                                            action="{{ route('client-stories-section.destroy', $value->id) }}"
+                                                        <form action="{{ route('client-stories-section.destroy', $value->id) }}"
                                                             method="POST" class="delete-form m-0 p-0 d-inline">
                                                             @csrf
                                                             @method('DELETE')
@@ -141,9 +130,9 @@
 @endsection
 @push('backend_scripts')
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             document.querySelectorAll('.delete-button').forEach(button => {
-                button.addEventListener('click', function() {
+                button.addEventListener('click', function () {
                     const form = this.closest('form');
                     Swal.fire({
                         title: 'Are you sure?',
@@ -161,9 +150,9 @@
                 });
             });
         });
-        document.addEventListener('DOMContentLoaded', function() {
-            document.querySelectorAll('.updateStatus').forEach(function(button) {
-                button.addEventListener('click', function() {
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('.updateStatus').forEach(function (button) {
+                button.addEventListener('click', function () {
                     const form = this.closest('form');
 
                     Swal.fire({

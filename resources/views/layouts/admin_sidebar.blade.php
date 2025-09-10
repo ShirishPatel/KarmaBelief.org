@@ -12,145 +12,7 @@
         </a>
     </div>
     <div class="menu-inner-shadow"></div>
-    {{-- <ul class="menu-inner py-1">
 
-        <li class="menu-item {{ Request::routeIs('dashboard') ? 'active' : '' }}">
-            <a href="{{ route('dashboard') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-home-smile"></i>
-                <div class="text-truncate" data-i18n="Dashboard">Dashboard</div>
-            </a>
-        </li>
-
-        <li class="menu-item open" style="">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-layout"></i>
-                <div class="text-truncate" data-i18n="Layouts">Home</div>
-            </a>
-
-            <ul class="menu-sub">
-                <li class="menu-item {{ Request::routeIs('home-hero-sections.*') ? 'active' : '' }}">
-                    <a href="{{ route('home-hero-sections.index') }}" class="menu-link">
-                        <div class="text-truncate" data-i18n="hero-section">Hero Section</div>
-                    </a>
-                </li>
-                <li class="menu-item {{ Request::routeIs('our-value-sections.*') ? 'active' : '' }}">
-                    <a href="{{ route('our-value-sections.index') }}" class="menu-link">
-                        <div class="text-truncate" data-i18n="hero-section">Our Values</div>
-                    </a>
-                </li>
-                <li class="menu-item {{ Request::routeIs('solutions.*') ? 'active' : '' }}">
-                    <a href="{{ route('solutions.index') }}" class="menu-link">
-                        <div class="text-truncate" data-i18n="Smart-Solution">Smart Solution</div>
-                    </a>
-                </li>
-                <li class="menu-item {{ Request::routeIs('why-choose-us-list.*') ? 'active' : '' }}">
-                    <a href="{{ route('why-choose-us-list.index') }}" class="menu-link">
-                        <div class="text-truncate" data-i18n="why-choose-us-list">Why Choose Us</div>
-                    </a>
-                </li>
-                <li class="menu-item {{ Request::routeIs('success.*') ? 'active' : '' }}">
-                    <a href="{{ route('success.index') }}" class="menu-link">
-                        <div class="text-truncate" data-i18n="why-choose-us-list">Success</div>
-                    </a>
-                </li>
-                <li class="menu-item {{ Request::routeIs('services.*') ? 'active' : '' }}">
-                    <a href="{{ route('services.index') }}" class="menu-link">
-                        <div class="text-truncate" data-i18n="why-choose-us-list">Services</div>
-                    </a>
-                </li>
-                <li class="menu-item {{ Request::routeIs('client-stories-section.*') ? 'active' : '' }}">
-                    <a href="{{ route('client-stories-section.index') }}" class="menu-link">
-                        <div class="text-truncate" data-i18n="why-choose-us-list">Client Stories</div>
-                    </a>
-                </li>
-            </ul>
-        </li>
-        <li class="menu-item open" style="">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-layout"></i>
-                <div class="text-truncate" data-i18n="Layouts">About </div>
-            </a>
-
-            <ul class="menu-sub">
-                <li class="menu-item  {{ Request::routeIs('about-technologie.*') ? 'active' : '' }}">
-                    <a href="{{ route('about-technologie.index') }}" class="menu-link">
-                        <div class="text-truncate" data-i18n="hero-section">About Technologies</div>
-                    </a>
-                </li>
-                <li class="menu-item  {{ Request::routeIs('about-counter.*') ? 'active' : '' }}">
-                    <a href="{{ route('about-counter.index') }}" class="menu-link">
-                        <div class="text-truncate" data-i18n="hero-section">Mission Vission</div>
-                    </a>
-                </li>
-
-                <li class="menu-item  {{ Request::routeIs('our-progress-section.*') ? 'active' : '' }}">
-                    <a href="{{ route('our-progress-section.index') }}" class="menu-link">
-                        <div class="text-truncate" data-i18n="hero-section">Our Progress Section</div>
-                    </a>
-                </li>
-                <li class="menu-item  {{ Request::routeIs('about-inquiry.*') ? 'active' : '' }}">
-                    <a href="{{ route('about-inquiry.index') }}" class="menu-link">
-                        <div class="text-truncate" data-i18n="hero-section">About Inquiry</div>
-                    </a>
-                </li>
-            </ul>
-        </li>
-
-        <li class="menu-item {{ Request::routeIs('blog-categories.*') ? 'active' : '' }}">
-            <a href="{{ route('blog-categories.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-home"></i>
-                <div class="text-truncate" data-i18n="blogs-categories">Blogs Categories</div>
-            </a>
-        </li>
-
-        <li class="menu-item {{ Request::routeIs('blogs.*') ? 'active' : '' }}">
-            <a href="{{ route('blogs.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-home-smile"></i>
-                <div class="text-truncate" data-i18n="Blogs">Blogs</div>
-            </a>
-        </li>
-
-        <li class="menu-item open ">
-            <a href="" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-cog"></i>
-                <div class="text-truncate" data-i18n="Testimonial">Testimonial</div>
-            </a>
-            <ul class="menu-sub">
-                <li class="menu-item  {{ Request::routeIs('testimonial.*') ? 'active' : '' }}">
-                    <a href="{{ route('testimonial.index') }}" class="menu-link">
-                        <div class="text-truncate" data-i18n="hero-section">Testimonial</div>
-                    </a>
-                </li>
-                <li class="menu-item  {{ Request::routeIs('award-testimonial.*') ? 'active' : '' }}">
-                    <a href="{{ route('award-testimonial.index') }}" class="menu-link">
-                        <div class="text-truncate" data-i18n="hero-section">Award Testimonials</div>
-                    </a>
-                </li>
-            </ul>
-        </li>
-
-        <li class="menu-item {{ Request::routeIs('newsletter') ? 'active' : '' }}">
-            <a href="{{ route('newsletter') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-cog"></i>
-                <div class="text-truncate" data-i18n="Configurations">Newsletter</div>
-            </a>
-        </li>
-
-
-        <li class="menu-item {{ Request::routeIs('settings.*') ? 'active' : '' }}">
-            <a href="{{ route('settings.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-cog"></i>
-                <div class="text-truncate" data-i18n="Configurations">Configurations</div>
-            </a>
-        </li>
-
-        <li class="menu-item">
-            <a href="{{ route('logout') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-log-out"></i>
-                <div class="text-truncate" data-i18n="Newsletter">Logout</div>
-            </a>
-        </li>
-    </ul> --}}
     <ul class="menu-inner py-1">
 
         <!-- Dashboard -->
@@ -164,7 +26,6 @@
         <!-- Home Section -->
         <li
             class="menu-item {{ Request::routeIs('home-hero-sections.*', 'our-value-sections.*', 'solutions.*', 'why-choose-us-list.*', 'success.*', 'services.*', 'client-stories-section.*') ? 'open' : '' }}">
-
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                 <div class="text-truncate" data-i18n="Home">Home</div>
@@ -177,38 +38,38 @@
                 </li>
                 <li class="menu-item {{ Request::routeIs('our-value-sections.*') ? 'active' : '' }}">
                     <a href="{{ route('our-value-sections.index') }}" class="menu-link">
-                        <div class="text-truncate" data-i18n="Our Values">Our Values</div>
+                        <div class="text-truncate" data-i18n="Major Causes">Major Causes</div>
                     </a>
                 </li>
                 <li class="menu-item {{ Request::routeIs('solutions.*') ? 'active' : '' }}">
                     <a href="{{ route('solutions.index') }}" class="menu-link">
-                        <div class="text-truncate" data-i18n="Smart Solution">Smart Solution</div>
+                        <div class="text-truncate" data-i18n="Featured Causes">Featured Causes</div>
                     </a>
                 </li>
-                <li class="menu-item {{ Request::routeIs('why-choose-us-list.*') ? 'active' : '' }}">
+                <li class="menu-item d-none {{ Request::routeIs('why-choose-us-list.*') ? 'active' : '' }}">
                     <a href="{{ route('why-choose-us-list.index') }}" class="menu-link">
                         <div class="text-truncate" data-i18n="Why Choose Us">Why Choose Us</div>
                     </a>
                 </li>
-                <li class="menu-item {{ Request::routeIs('success.*') ? 'active' : '' }}">
+                <li class="menu-item d-none {{ Request::routeIs('success.*') ? 'active' : '' }}">
                     <a href="{{ route('success.index') }}" class="menu-link">
                         <div class="text-truncate" data-i18n="Success">Success</div>
                     </a>
                 </li>
-                <li class="menu-item {{ Request::routeIs('services.*') ? 'active' : '' }}">
+                <li class="menu-item d-none {{ Request::routeIs('services.*') ? 'active' : '' }}">
                     <a href="{{ route('services.index') }}" class="menu-link">
                         <div class="text-truncate" data-i18n="Services">Services</div>
                     </a>
                 </li>
                 <li class="menu-item {{ Request::routeIs('client-stories-section.*') ? 'active' : '' }}">
                     <a href="{{ route('client-stories-section.index') }}" class="menu-link">
-                        <div class="text-truncate" data-i18n="Client Stories">Client Stories</div>
+                        <div class="text-truncate" data-i18n="Initial Donations">Initial Donations</div>
                     </a>
                 </li>
             </ul>
         </li>
 
-        <li class="menu-item  {{ Request::routeIs('c-d-home-hero.*', 'c-d-process.*') ? 'open' : '' }}">
+        <li class="menu-item d-none  {{ Request::routeIs('c-d-home-hero.*', 'c-d-process.*') ? 'open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-message-dots"></i>
                 <div class="text-truncate" data-i18n="custom-development">Custom Development</div>
@@ -228,7 +89,7 @@
         </li>
 
         <li
-            class="menu-item  {{ Request::routeIs('ai-ml.*', 'ai-ml-gallery.*', 'ai-ml-process.*', 'ai-ml-tag-gallery.*') ? 'open' : '' }}">
+            class="menu-item d-none   {{ Request::routeIs('ai-ml.*', 'ai-ml-gallery.*', 'ai-ml-process.*', 'ai-ml-tag-gallery.*') ? 'open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-message-dots"></i>
                 <div class="text-truncate" data-i18n="custom-development">AI & ML</div>
@@ -254,7 +115,7 @@
 
         <!-- About Section -->
         <li
-            class="menu-item {{ Request::routeIs('about-technologie.*', 'about-counter.*', 'our-progress-section.*', 'about-inquiry.*') ? 'open' : '' }}">
+            class="menu-item d-none  {{ Request::routeIs('about-technologie.*', 'about-counter.*', 'our-progress-section.*', 'about-inquiry.*') ? 'open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-info-circle"></i>
                 <div class="text-truncate" data-i18n="About">About</div>
@@ -278,7 +139,7 @@
 
             </ul>
         </li>
-        <li class="menu-item {{ Request::routeIs('about-inquiry.*') ? 'active' : '' }}">
+        <li class="menu-item d-none  {{ Request::routeIs('about-inquiry.*') ? 'active' : '' }}">
             <a href="{{ route('about-inquiry.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-category"></i>
                 <div class="text-truncate" data-i18n="About Inquiry">Inquiry Section</div>
@@ -286,7 +147,7 @@
         </li>
 
         <!-- Blog Categories -->
-        <li class="menu-item {{ Request::routeIs('blog-categories.*') ? 'active' : '' }}">
+        <li class="menu-item d-none  {{ Request::routeIs('blog-categories.*') ? 'active' : '' }}">
             <a href="{{ route('blog-categories.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-category"></i>
                 <div class="text-truncate" data-i18n="Blog Categories">Blog Categories</div>
@@ -302,7 +163,7 @@
         </li>
 
         <!-- Testimonial -->
-        <li class="menu-item  {{ Request::routeIs('testimonial.*', 'award-testimonial.*') ? 'open' : '' }}">
+        <li class="menu-item d-none  {{ Request::routeIs('testimonial.*', 'award-testimonial.*') ? 'open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-message-dots"></i>
                 <div class="text-truncate" data-i18n="Testimonial">Testimonial</div>
@@ -322,7 +183,7 @@
         </li>
 
         <!--case Study-->
-        <li class="menu-item {{ Request::routeIs(['case-studies.*', 'project.*']) ? 'active open' : '' }}">
+        <li class="menu-item d-none  {{ Request::routeIs(['case-studies.*', 'project.*']) ? 'active open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-collection"></i>
                 <div data-i18n="Stages">Case Study</div>
@@ -342,7 +203,7 @@
         </li>
 
         <!-- Newsletter -->
-        <li class="menu-item {{ Request::routeIs('newsletter') ? 'active' : '' }}">
+        <li class="menu-item  d-none {{ Request::routeIs('newsletter') ? 'active' : '' }}">
             <a href="{{ route('newsletter') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-envelope"></i>
                 <div class="text-truncate" data-i18n="Newsletter">Newsletter</div>

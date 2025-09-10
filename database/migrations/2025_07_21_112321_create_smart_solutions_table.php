@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('smart_solutions', function (Blueprint $table) {
             $table->id();
-            $table->string('solution_title');
             $table->string('solution_heading');
             $table->text('solution_description');
              $table->string('user_id');

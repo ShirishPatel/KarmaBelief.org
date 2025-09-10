@@ -1,43 +1,29 @@
 @extends('layouts.admin')
-@section('title', 'Our Values Section')
+@section('title', 'Causes')
 @section('backend_content')
-    <div class="col-xl-12">
-        <h6 class="text-body-secondary">Value Section</h6>
+    <div class="card shadow-none p-0">
         <div class="nav-align-top nav-tabs-shadow">
             <ul class="nav nav-tabs" role="tablist">
                 <li class="nav-item" role="presentation">
                     <button type="button" class="nav-link active" role="tab" data-bs-toggle="tab"
-                        data-bs-target="#navs-top-home" aria-controls="navs-top-home" aria-selected="true">Our Values
+                        data-bs-target="#navs-top-home" aria-controls="navs-top-home" aria-selected="true">Causes
                         Section</button>
                 </li>
                 <li class="nav-item" role="presentation">
                     <button type="button" class="nav-link" role="tab" data-bs-toggle="tab"
                         data-bs-target="#navs-top-profile" aria-controls="navs-top-profile" aria-selected="false"
-                        tabindex="-1">Our Values</button>
+                        tabindex="-1">Causes</button>
                 </li>
 
             </ul>
             <div class="tab-content">
                 <div class="tab-pane fade active show" id="navs-top-home" role="tabpanel">
-                    <div class="container mt-4">
-                        <h2>Our Values Section</h2>
-
-                        @if (session('success'))
-                            <div class="alert alert-success">{{ session('success') }}</div>
-                        @endif
-
+                    <div class="card-header">
+                        <h5 class="card-title">Major Causes</h5>
+                    </div>
+                    <div class="card-body">
                         <form action="{{ route('our-value-sections.store') }}" method="POST">
                             @csrf
-
-                            <div class="mb-3">
-                                <label for="tag_title">Tag Title</label>
-                                <input type="text" class="form-control" name="tag_title" id="tag_title"
-                                    value="{{ old('tag_title', $value->tag_title ?? '') }}">
-                                @error('tag_title')
-                                    <small class="text-danger">{{ $message }}</small>
-                                @enderror
-                            </div>
-
                             <div class="mb-3">
                                 <label for="heading">Heading</label>
                                 <input type="text" class="form-control" name="heading" id="heading"
@@ -49,7 +35,8 @@
 
                             <div class="mb-3">
                                 <label for="description">Description</label>
-                                <textarea name="description" id="description" class="form-control" rows="4">{{ old('description', $value->description ?? '') }}</textarea>
+                                <textarea name="description" id="description" class="form-control"
+                                    rows="4">{{ old('description', $value->description ?? '') }}</textarea>
                                 @error('description')
                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror
@@ -60,57 +47,52 @@
                     </div>
                 </div>
                 <div class="tab-pane fade" id="navs-top-profile" role="tabpanel">
-                    <div class="col-md-12">
-                        <div class="card">
-                            <div class="card-header d-flex justify-content-between align-items-center">
-                                <h5 class="mb-0">Our Value List</h5>
-                                <a href="{{ route('our-value.create') }}" class="btn btn-success btn-sm">Create</a>
-                            </div>
-                            <div class="card-body">
-                                <table class="table table-bordered table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>Image</th>
-                                            <th>Heading</th>
-                                            <th>Description</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($valueImg as $key => $value)
-                                            <tr>
-                                                <td>
-                                                    @if ($value->image)
-                                                        <img src="{{ asset('storage/' . $value->image) }}" height="50">
-                                                    @endif
-                                                </td>
-                                                <td>{{ $value->heading }}</td>
-                                                <td>{{ $value->description }}</td>
-                                                <td class="d-flex gap-2 align-items-center">
-                                                    <a href="{{ route('our-value.edit', $value->id) }}"
-                                                        class="btn btn-outline-success btn-sm shadow-sm btn-flat mx-1 d-flex align-items-center"
-                                                        data-toggle="tooltip" data-placement="top" title="Edit Record">
-                                                        <i class="tf-icons bx bxs-edit"></i>
-                                                    </a>
-                                                    <form action="{{ route('our-value.destroy', $value->id) }}"
-                                                        method="POST" class="delete-form m-0 p-0 d-inline">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="button"
-                                                            class="btn btn-danger btn-sm shadow-sm btn-flat mx-1 delete-button d-flex align-items-center"
-                                                            data-toggle="tooltip" data-placement="top"
-                                                            title="Delete Record">
-                                                            <i class="tf-icons bx bxs-trash"></i>
-                                                        </button>
-                                                    </form>
-                                                </td>
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="card-title">Causes List</h5>
+                        <a href="{{ route('our-value.create') }}" class="btn btn-success btn-sm">Create</a>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Image</th>
+                                    <th>Heading</th>
+                                    <th>Description</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($valueImg as $key => $value)
+                                    <tr>
+                                        <td>
+                                            @if ($value->image)
+                                                <img src="{{ asset('storage/' . $value->image) }}" height="50">
+                                            @endif
+                                        </td>
+                                        <td>{{ $value->heading }}</td>
+                                        <td>{{ $value->description }}</td>
+                                        <td class="d-flex gap-2 align-items-center">
+                                            <a href="{{ route('our-value.edit', $value->id) }}"
+                                                class="btn btn-outline-success btn-sm shadow-sm btn-flat mx-1 d-flex align-items-center"
+                                                data-toggle="tooltip" data-placement="top" title="Edit Record">
+                                                <i class="tf-icons bx bxs-edit"></i>
+                                            </a>
+                                            <form action="{{ route('our-value.destroy', $value->id) }}" method="POST"
+                                                class="delete-form m-0 p-0 d-inline">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="button"
+                                                    class="btn btn-danger btn-sm shadow-sm btn-flat mx-1 delete-button d-flex align-items-center"
+                                                    data-toggle="tooltip" data-placement="top" title="Delete Record">
+                                                    <i class="tf-icons bx bxs-trash"></i>
+                                                </button>
+                                            </form>
+                                        </td>
 
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -119,9 +101,9 @@
 @endsection
 @push('backend_scripts')
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             document.querySelectorAll('.delete-button').forEach(button => {
-                button.addEventListener('click', function() {
+                button.addEventListener('click', function () {
                     const form = this.closest('form');
                     Swal.fire({
                         title: 'Are you sure?',

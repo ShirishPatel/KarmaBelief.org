@@ -10,15 +10,15 @@
                     enctype="multipart/form-data">
                     @csrf
                     <div class="card-body">
-                        <div class="row row-cols-1 row-cols-md-3">
+                        <div class="row row-cols-1 row-cols-md-4 g-4">
                             <div
                                 class="col d-flex flex-column align-items-start align-items-sm-start gap-6 pb-4 border-bottom">
                                 @if (!empty($records->site_logo_light))
                                     <img src="{{ asset('storage/' . $records->site_logo_light) }}" alt="Site Logo"
-                                        class="d-block w-100 h-px-100 rounded border">
+                                        class="d-block w-auto h-px-100 rounded border">
                                 @else
                                     <img src="{{ asset('assets/backend/img/avatars/1.png') }}" alt="user-avatar"
-                                        class="d-block w-100 h-px-100 rounded border" id="" />
+                                        class="d-block w-auto h-px-100 rounded border" id="" />
                                 @endif
                                 <div class="button-wrapper">
                                     <label for="site_logo_light" class="btn btn-primary me-3 mb-4 btn-sm">
@@ -27,8 +27,7 @@
                                         <input type="file" id="site_logo_light" name="site_logo_light"
                                             class="account-file-input" hidden accept="image/png, image/jpeg" />
                                     </label>
-                                    <button type="button"
-                                        class="btn btn-outline-secondary account-image-reset mb-4 btn-sm">
+                                    <button type="button" class="btn btn-outline-secondary account-image-reset mb-4 btn-sm">
                                         <i class="bx bx-reset d-block d-sm-none"></i>
                                         <span class="d-none d-sm-block">Reset</span>
                                     </button>
@@ -41,10 +40,10 @@
                                 class="col d-flex flex-column align-items-start align-items-sm-start gap-6 pb-4 border-bottom">
                                 @if (!empty($records->site_logo_dark))
                                     <img src="{{ asset('storage/' . $records->site_logo_dark) }}" alt="Site Logo"
-                                        class="d-block w-100 h-px-100 rounded border">
+                                        class="d-block w-auto h-px-100 rounded border">
                                 @else
                                     <img src="{{ asset('assets/backend/img/avatars/1.png') }}" alt="user-avatar"
-                                        class="d-block w-100 h-px-100 rounded border" />
+                                        class="d-block w-auto h-px-100 rounded border" />
                                 @endif
                                 <div class="button-wrapper">
                                     <label for="site_logo_dark" class="btn btn-primary me-3 mb-4 btn-sm">
@@ -53,8 +52,7 @@
                                         <input type="file" id="site_logo_dark" name="site_logo_dark"
                                             class="account-file-input" hidden accept="image/png, image/jpeg" />
                                     </label>
-                                    <button type="button"
-                                        class="btn btn-outline-secondary account-image-reset mb-4 btn-sm">
+                                    <button type="button" class="btn btn-outline-secondary account-image-reset mb-4 btn-sm">
                                         <i class="bx bx-reset d-block d-sm-none"></i>
                                         <span class="d-none d-sm-block">Reset</span>
                                     </button>
@@ -67,20 +65,19 @@
                                 class="col d-flex flex-column align-items-start align-items-sm-start gap-6 pb-4 border-bottom">
                                 @if (!empty($records->favicon))
                                     <img src="{{ asset('storage/' . $records->favicon) }}" alt="Site Logo"
-                                        class="d-block w-100 h-px-100 rounded border">
+                                        class="d-block w-auto h-px-100 rounded border">
                                 @else
                                     <img src="{{ asset('assets/backend/img/avatars/1.png') }}" alt="user-avatar"
-                                        class="d-block w-100 h-px-100 rounded border" />
+                                        class="d-block w-auto h-px-100 rounded border" />
                                 @endif
                                 <div class="button-wrapper">
                                     <label for="favicon" class="btn btn-primary me-3 mb-4 btn-sm">
                                         <span class="d-none d-sm-block">Favicon icon</span>
                                         <i class="bx bx-upload d-block d-sm-none"></i>
-                                        <input type="file" name="favicon" id="favicon" class="account-file-input"
-                                            hidden accept="image/png, image/jpeg" />
+                                        <input type="file" name="favicon" id="favicon" class="account-file-input" hidden
+                                            accept="image/png, image/jpeg" />
                                     </label>
-                                    <button type="button"
-                                        class="btn btn-outline-secondary account-image-reset mb-4 btn-sm">
+                                    <button type="button" class="btn btn-outline-secondary account-image-reset mb-4 btn-sm">
                                         <i class="bx bx-reset d-block d-sm-none"></i>
                                         <span class="d-none d-sm-block">Reset</span>
                                     </button>
@@ -121,8 +118,8 @@
                         <div class="col mb-3">
                             <div class="form-group">
                                 <label class="form-label" for="site_description">Description</label>
-                                <textarea type="text" name="site_description" rows="2" class="form-control" id="site_description"
-                                    placeholder="">{{ $records->site_description ?? '' }}</textarea>
+                                <textarea type="text" name="site_description" rows="2" class="form-control"
+                                    id="site_description" placeholder="">{{ $records->site_description ?? '' }}</textarea>
                                 <span class="text-danger">{{ $errors->first('site_description') }}</span>
                             </div>
                         </div>
@@ -135,8 +132,8 @@
                             </div>
                             <div class="col">
                                 <label for="social_twitter" class="form-label">Twitter</label>
-                                <input class="form-control" type="social_twitter" name="social_twitter"
-                                    id="social_twitter" value="{{ $records->social_twitter ?? '' }}" />
+                                <input class="form-control" type="social_twitter" name="social_twitter" id="social_twitter"
+                                    value="{{ $records->social_twitter ?? '' }}" />
                                 <span class="text-danger">{{ $errors->first('social_twitter') }}</span>
                             </div>
                             <div class="col">
@@ -153,13 +150,13 @@
                             </div>
                         </div>
 
-                        <div class="row row-cols-1 row-cols-md-2 g-3 mb-3">
+                        <div class="row row-cols-1 row-cols-md-2 g-3 mb-3 d-none">
                             <div class="col">
                                 <div
                                     class="col d-flex flex-column align-items-start align-items-sm-start gap-6 pb-4 border-bottom">
                                     @if (!empty($records->footer_business_image))
-                                        <img src="{{ asset('storage/' . $records->footer_business_image) }}"
-                                            alt="Site Logo" class="d-block w-auto h-px-100 rounded border">
+                                        <img src="{{ asset('storage/' . $records->footer_business_image) }}" alt="Site Logo"
+                                            class="d-block w-auto h-px-100 rounded border">
                                     @else
                                         <img src="{{ asset('assets/backend/img/avatars/1.png') }}" alt="user-avatar"
                                             class="d-block w-auto h-px-100 rounded border" id="" />
@@ -187,7 +184,8 @@
                                     <label class="form-label" for="footer_business_description">Footer Business
                                         Description</label>
                                     <textarea type="text" name="footer_business_description" rows="8" class="form-control"
-                                        id="footer_business_description" placeholder="">{{ $records->footer_business_description ?? '' }}</textarea>
+                                        id="footer_business_description"
+                                        placeholder="">{{ $records->footer_business_description ?? '' }}</textarea>
                                     <span class="text-danger">{{ $errors->first('footer_business_description') }}</span>
                                 </div>
                             </div>
