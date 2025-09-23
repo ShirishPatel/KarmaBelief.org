@@ -115,7 +115,7 @@
 
         <!-- About Section -->
         <li
-            class="menu-item d-none  {{ Request::routeIs('about-technologie.*', 'about-counter.*', 'our-progress-section.*', 'about-inquiry.*') ? 'open' : '' }}">
+            class="menu-item  {{ Request::routeIs('about-technologie.*', 'about-counter.*', 'our-progress-section.*', 'about-inquiry.*') ? 'open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-info-circle"></i>
                 <div class="text-truncate" data-i18n="About">About</div>
@@ -123,7 +123,7 @@
             <ul class="menu-sub">
                 <li class="menu-item {{ Request::routeIs('about-technologie.*') ? 'active' : '' }}">
                     <a href="{{ route('about-technologie.index') }}" class="menu-link">
-                        <div class="text-truncate" data-i18n="About Technologies">About Technologies</div>
+                        <div class="text-truncate" data-i18n="About Company">About Company</div>
                     </a>
                 </li>
                 <li class="menu-item {{ Request::routeIs('about-counter.*') ? 'active' : '' }}">

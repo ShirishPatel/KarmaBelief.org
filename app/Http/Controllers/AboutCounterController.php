@@ -18,6 +18,7 @@ class AboutCounterController extends Controller
             'main_heading'    => 'nullable|string|max:255',
             'counter_title.*' => 'nullable|string|max:255',
             'counter_value.*' => 'nullable|string|max:255',
+            'counter_city.*' => 'nullable|string|max:255',
         ]);
 
         $counters = [];
@@ -25,6 +26,7 @@ class AboutCounterController extends Controller
             $counters[] = [
                 'title' => $title,
                 'value' => $request->counter_value[$index],
+                'city' => $request->counter_city[$index],
             ];
         }
 

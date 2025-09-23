@@ -19,20 +19,7 @@
     </section>
     <!-- Banner area end here -->
 
-    <!-- Choose area start here -->
-    @php
-        $record = DB::table('about_technologies')->first();
-    @endphp
-
-    @if (
-            $record &&
-            ($record->heading ||
-                $record->tag_line ||
-                $record->data ||
-                $record->btn_label ||
-                $record->btn_link ||
-                $record->image)
-        )
+    @isset($about)
         <section class="choose-area sub-bg pt-120 pb-120">
             <div class="container">
                 <div class="row g-5 align-items-center">
@@ -40,69 +27,38 @@
                         <div class="choose__item-left">
                             <div class="section-header mb-30">
                                 <h2 class="fw-600 wow splt-txt" data-splitting>
-                                    {{ $record->heading ?? '' }}
+                                    {{ $about->heading ?? '' }}
                                 </h2>
                                 <p class="wow fadeInUp" data-wow-delay="200ms" data-wow-duration="1500ms">
-                                    {{ $record->tag_line ?? '' }}
+                                    {{ $about->tag_line ?? '' }}
                                 </p>
                             </div>
-                            @if (!empty($record->data))
-                                <ul class="wow fadeInUp" data-wow-delay="600ms" data-wow-duration="1500ms">
-                                    @foreach (json_decode($record->data, true) as $point)
-                                        <li class="mb-15"><span></span> {{ Str::after($point, ':') }}</li>
-                                    @endforeach
-                                </ul>
-                            @endif
-                            @if (!empty($record->btn_label))
+                            <ul class="wow fadeInUp" data-wow-delay="600ms" data-wow-duration="1500ms">
+                                <li class="mb-15"><span></span> {{ Str::after($about->data, ':') }}</li>
+                            </ul>
+                            @if (!empty($about->btn_label))
                                 <a class='btn-three wow fadeInUp mt-45' data-wow-delay='7s' data-wow-duration='1500ms'
-                                    href='{{ $record->btn_link ?? '#' }}'>
-                                    {{ $record->btn_label }} <i class="fa-regular fa-arrow-right"></i>
+                                    href='{{ $about->btn_link ?? '#' }}'>
+                                    {{ $about->btn_label }} <i class="fa-regular fa-arrow-right"></i>
                                 </a>
                             @endif
                         </div>
                     </div>
                     <div class="col-lg-6 wow animate__zoomIn" data-wow-delay="400ms" data-wow-duration="2000ms">
                         <div class="choose__image">
-                            @php
-                                $images = isset($record->image) ? explode(',', $record->image) : [];
-                            @endphp
-
-                            @if (!empty($images))
-                                <div class="row g-2 g-sm-4">
-                                    @if (isset($images[2]))
-                                        <div class="col-6">
-                                            <div class="image">
-                                                <img src="{{ asset('storage/' . $images[2]) }}" alt="image" class="img-fluid">
-                                            </div>
-                                        </div>
-                                    @endif
-                                    @if (isset($images[1]))
-                                        <div class="col-6">
-                                            <div class="image">
-                                                <img src="{{ asset('storage/' . $images[1]) }}" alt="image" class="img-fluid">
-                                            </div>
-                                        </div>
-                                    @endif
-                                    @if (isset($images[0]))
-                                        <div class="col-12">
-                                            <div class="image">
-                                                <img src="{{ asset('storage/' . $images[0]) }}" alt="image" class="img-fluid w-100">
-                                            </div>
-                                        </div>
-                                    @endif
+                            <div class="row g-2 g-sm-4">
+                                <div class="col-12">
+                                    <div class="image">
+                                        <img src="{{ asset('storage/' . $about->image) }}" alt="image" class="img-fluid">
+                                    </div>
                                 </div>
-                            @endif
-
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-    @endif
-
-    <!-- Choose area end here -->
-
-
+    @endisset
 
     <!-- Fanfact area start here -->
     @php
@@ -113,11 +69,14 @@
         <section class="fanfact-area pt-120 pb-120">
             <div class="container">
                 <div class="row g-4 justify-content-between">
-
-                    <div class="col-lg-5">
+                    <div class="col-lg-6">
                         <div class="fanfact__item-left">
                             <h2>{{ $records->heading_1 ?? '' }}</h2>
                             <p class="mb-30">{{ $records->description_1 ?? '' }}</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="fanfact__item-left">
                             <h2>{{ $records->heading_2 ?? '' }}</h2>
                             <p>{{ $records->description_2 ?? '' }}</p>
                         </div>
@@ -128,17 +87,23 @@
                     @endphp
 
                     @if ($record && ($record->main_heading || !empty($record->counters)))
-                        <div class="col-lg-6">
+                        <div class="col-lg-12">
                             <h2 class="mb-60 fw-300">{{ $record->main_heading ?? '' }}</h2>
-                            <div class="fanfact__item-right">
+                            <div class="row row-cols-5">
                                 @if (!empty($record->counters))
                                     @php $counters = json_decode($record->counters, true); @endphp
                                     @foreach ($counters as $counter)
-                                        <div class="fanfact__item mb-60">
-                                            <h2 class="mb-10"><span
-                                                    class="count">{{ preg_replace('/[^0-9]/', '', $counter['value']) }}</span>{{ preg_replace('/[0-9]/', '', $counter['value']) }}
-                                            </h2>
+                                        <div class="col mb-60 text-center">
                                             <strong>{{ $counter['title'] }}</strong>
+                                            <h2 class="mb-10">
+                                                <span class="count">
+                                                    {{ $counter['value'] }}
+                                                </span>
+                                                {{-- <span class="count">
+                                                    {{ preg_replace('/[^0-9]/', '', $counter['value']) }}
+                                                </span>{{ preg_replace('/[0-9]/', '', $counter['value']) }} --}}
+                                            </h2>
+                                            <strong>{{ $counter['city'] ?? '' }}</strong>
                                         </div>
                                     @endforeach
                                 @endif
@@ -509,26 +474,26 @@
 
     {{-- <!-- Book area start here -->
     @php
-        $record = DB::table('about_inquiry')->first();
+    $record = DB::table('about_inquiry')->first();
     @endphp
 
     @if ($record && ($record->heading || $record->description || $record->btn_label || $record->btn_link))
-        <section class="book-area">
-            <div class="container">
-                <div class="book__wrp">
-                    <div class="book__item">
-                        <h2>{{ $record->heading ?? '' }}</h2>
-                        <p class="mt-20 mb-25">{{ $record->description ?? '' }}</p>
-                        <a href="{{ $record->btn_link ?? '#' }}" class="btn-two border-none ">{{ $record->btn_label ?? '' }}
-                            <span>
-                                <i class="fa-regular fa-arrow-up-right arry1"></i>
-                                <i class="fa-regular fa-arrow-up-right arry2"></i>
-                            </span>
-                        </a>
-                    </div>
+    <section class="book-area">
+        <div class="container">
+            <div class="book__wrp">
+                <div class="book__item">
+                    <h2>{{ $record->heading ?? '' }}</h2>
+                    <p class="mt-20 mb-25">{{ $record->description ?? '' }}</p>
+                    <a href="{{ $record->btn_link ?? '#' }}" class="btn-two border-none ">{{ $record->btn_label ?? '' }}
+                        <span>
+                            <i class="fa-regular fa-arrow-up-right arry1"></i>
+                            <i class="fa-regular fa-arrow-up-right arry2"></i>
+                        </span>
+                    </a>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
     @endif
 
     <!-- Book area end here --> --}}

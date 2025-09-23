@@ -1,7 +1,8 @@
 <!doctype html>
 
 <html lang="en" class="light-style layout-compact layout-navbar-fixed layout-menu-fixed" dir="ltr"
-    data-theme="theme-default" data-assets-path="../assets/" data-template="vertical-menu-template-free" data-style="light">
+    data-theme="theme-default" data-assets-path="../assets/" data-template="vertical-menu-template-free"
+    data-style="light">
 
 <head>
     <meta charset="utf-8" />
@@ -43,7 +44,32 @@
     @include('layouts.admin_footer_links')
 </body>
 @stack('backend_scripts')
+
 <script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify"></script>
 <script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.polyfills.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const tabButtons = document.querySelectorAll('.nav-link');
+        const savedTab = localStorage.getItem('activeTab');
+
+        // Activate saved tab or first tab by default
+        if (savedTab) {
+            const targetButton = Array.from(tabButtons).find(btn => btn.dataset.bsTarget === savedTab);
+            if (targetButton) {
+                new bootstrap.Tab(targetButton).show();
+            }
+        } else {
+            // Default: first tab active
+            new bootstrap.Tab(tabButtons[0]).show();
+        }
+
+        // Save active tab to localStorage on click
+        tabButtons.forEach(button => {
+            button.addEventListener('shown.bs.tab', function (event) {
+                localStorage.setItem('activeTab', event.target.dataset.bsTarget);
+            });
+        });
+    });
+</script>
 
 </html>

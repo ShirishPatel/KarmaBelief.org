@@ -79,7 +79,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::post('why-choose-us/button/save', [WhyChooseUsController::class, 'updateButtonData'])->name('why-choose-btn.store');
 
     //About Us
-    Route::resource('about-technologie', AboutTechnologieController::class);
+    Route::resource('about-company', AboutTechnologieController::class)->names('about-technologie');
 
     //Mission / vision
     Route::post('mission-vission/store', [AboutCounterController::class, 'missionstore'])->name('mission-vission.missionstore');

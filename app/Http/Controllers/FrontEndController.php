@@ -39,7 +39,9 @@ class FrontEndController extends Controller
     }
     public function about_us()
     {
-        return view('frontend.about-us');
+        $about = DB::table('about_technologies')->first();
+
+        return view('frontend.about-us', compact('about'));
     }
     public function services()
     {

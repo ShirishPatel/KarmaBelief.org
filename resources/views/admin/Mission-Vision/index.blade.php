@@ -12,8 +12,8 @@
                     </button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button type="button" class="nav-link" role="tab" data-bs-toggle="tab"
-                        data-bs-target="#list-section" aria-controls="list-section" aria-selected="false">
+                    <button type="button" class="nav-link" role="tab" data-bs-toggle="tab" data-bs-target="#list-section"
+                        aria-controls="list-section" aria-selected="false">
                         Counter
                     </button>
                 </li>
@@ -43,7 +43,8 @@
 
                             <div class="mb-3">
                                 <label>Description 1</label>
-                                <textarea name="description_1" class="form-control" rows="4">{{ old('description_1', $records->description_1 ?? '') }}</textarea>
+                                <textarea name="description_1" class="form-control"
+                                    rows="4">{{ old('description_1', $records->description_1 ?? '') }}</textarea>
                                 @error('description_1')
                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror
@@ -59,7 +60,8 @@
 
                             <div class="mb-3">
                                 <label>Description 2</label>
-                                <textarea name="description_2" class="form-control" rows="4">{{ old('description_2', $records->description_2 ?? '') }}</textarea>
+                                <textarea name="description_2" class="form-control"
+                                    rows="4">{{ old('description_2', $records->description_2 ?? '') }}</textarea>
                                 @error('description_2')
                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror
@@ -73,10 +75,6 @@
                 <div class="tab-pane fade" id="list-section" role="tabpanel">
                     <div class="container mt-4">
                         <h5>Counter Section</h5>
-                        @if (session('success'))
-                            <div class="alert alert-success">{{ session('success') }}</div>
-                        @endif
-
                         @php
                             $counters = json_decode($record->counters ?? '[]');
                         @endphp
@@ -90,43 +88,56 @@
                                     value="{{ old('main_heading', $record->main_heading ?? '') }}">
                             </div>
 
-                            <div id="dynamic-fields-wrapper">
+                            <div id="dynamic-fields-wrapper" class="row row-cols-md-4 g-3">
                                 @if (!empty($counters))
                                     @foreach ($counters as $key => $counter)
-                                        <div class="heading-desc-group border p-3 rounded mb-3">
-                                            <h5>Counter Detail</h5>
-                                            <div class="mb-3">
-                                                <label>Counter Title</label>
-                                                <input type="text" name="counter_title[]" class="form-control"
-                                                    value="{{ $counter->title }}">
+                                        <div class="col">
+                                            <div class="h-100 heading-desc-group border p-3 rounded">
+                                                <h5>Counter Detail</h5>
+                                                <div class="mb-3">
+                                                    <label>Counter Title</label>
+                                                    <input type="text" name="counter_title[]" class="form-control"
+                                                        value="{{ $counter->title }}">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label>Counter Value</label>
+                                                    <input type="text" name="counter_value[]" class="form-control"
+                                                        value="{{ $counter->value }}">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label>City/State</label>
+                                                    <input type="text" name="counter_city[]" class="form-control"
+                                                        value="{{ $counter->city ?? '' }}">
+                                                </div>
+                                                <button type="button"
+                                                    class="btn btn-danger btn-sm mt-2 remove-block {{ $loop->first ? 'd-none' : '' }}">Remove</button>
                                             </div>
-                                            <div class="mb-3">
-                                                <label>Counter Value</label>
-                                                <input type="text" name="counter_value[]" class="form-control"
-                                                    value="{{ $counter->value }}">
-                                            </div>
-                                            <button type="button"
-                                                class="btn btn-danger btn-sm mt-2 remove-block {{ $loop->first ? 'd-none' : '' }}">Remove</button>
                                         </div>
                                     @endforeach
                                 @else
-                                    <div class="heading-desc-group border p-3 rounded mb-3">
-                                        <h5>Counter Detail</h5>
-                                        <div class="mb-3">
-                                            <label>Counter Title</label>
-                                            <input type="text" name="counter_title[]" class="form-control">
+                                    <div class="col">
+                                        <div class="h-100 heading-desc-group border p-3 rounded">
+                                            <h5>Counter Detail</h5>
+                                            <div class="mb-3">
+                                                <label>Counter Title</label>
+                                                <input type="text" name="counter_title[]" class="form-control">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label>Counter Value</label>
+                                                <input type="text" name="counter_value[]" class="form-control">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label>City/State</label>
+                                                <input type="text" name="counter_city[]" class="form-control">
+                                            </div>
+                                            <button type="button"
+                                                class="btn btn-danger btn-sm mt-2 remove-block d-none">Remove</button>
                                         </div>
-                                        <div class="mb-3">
-                                            <label>Counter Value</label>
-                                            <input type="text" name="counter_value[]" class="form-control">
-                                        </div>
-                                        <button type="button"
-                                            class="btn btn-danger btn-sm mt-2 remove-block d-none">Remove</button>
                                     </div>
                                 @endif
                             </div>
 
-                            <button type="button" id="add-more" class="btn btn-sm btn-primary mb-3">+ Add More</button><br>
+                            <button type="button" id="add-more" class="btn btn-sm btn-primary my-3">+ Add More</button><br>
                             <button type="submit" class="btn btn-primary ">Save</button>
                         </form>
 
@@ -139,18 +150,18 @@
 @endsection
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
         const wrapper = document.getElementById('dynamic-fields-wrapper');
         const addMoreBtn = document.getElementById('add-more');
 
-        addMoreBtn.addEventListener('click', function() {
+        addMoreBtn.addEventListener('click', function () {
             const newBlock = wrapper.firstElementChild.cloneNode(true);
             newBlock.querySelectorAll('input, textarea').forEach(el => el.value = '');
             newBlock.querySelector('.remove-block').classList.remove('d-none');
             wrapper.appendChild(newBlock);
         });
 
-        wrapper.addEventListener('click', function(e) {
+        wrapper.addEventListener('click', function (e) {
             if (e.target.classList.contains('remove-block')) {
                 e.target.closest('.heading-desc-group').remove();
             }
