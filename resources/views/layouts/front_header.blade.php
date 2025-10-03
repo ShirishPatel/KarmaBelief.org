@@ -14,28 +14,28 @@
                                     class="fa-solid fa-angle-down ms-2"></i></a>
                             <ul class="sub-menu">
                                 <li><a href='{{ route('about-us') }}'>About Us</a></li>
-                                <li><a href='{{ route('about-us') }}'>Certificates</a></li>
-                                <li><a href='{{ route('about-us') }}'>Tax Exemption</a></li>
-                                <li><a href='{{ route('about-us') }}'>Donation Policy</a></li>
+                                <li><a href='{{ route('certificate') }}'>Certificates</a></li>
+                                <li><a href='{{ route('tex-exemption') }}'>Tax Exemption</a></li>
+                                <li><a href='{{ route('donation-policy') }}'>Donation Policy</a></li>
                             </ul>
                         </li>
                         <li>
                             <a href="#0" class="d-flex align-items-center">Activities<i
                                     class="fa-solid fa-angle-down ms-2"></i></a>
                             <ul class="sub-menu">
-                                <li><a href='{{ route('about-us') }}'>Gallery</a></li>
-                                <li><a href='{{ route('about-us') }}'>Events</a></li>
+                                <li><a href='{{ route('gallery') }}'>Gallery</a></li>
+                                <li><a href='{{ route('event') }}'>Events</a></li>
                             </ul>
                         </li>
                         <li>
                             <a href="#0" class="d-flex align-items-center">Get Involved<i
                                     class="fa-solid fa-angle-down ms-2"></i></a>
                             <ul class="sub-menu">
-                                <li><a href='{{ route('about-us') }}'>Causes</a></li>
-                                <li><a href='{{ route('about-us') }}'>Donate</a></li>
+                                <li><a href='{{ route('causes') }}'>Causes</a></li>
+                                <li><a href='{{ route('donate') }}'>Donate</a></li>
                             </ul>
                         </li>
-                        <li><a href='{{ route('home') }}'>Contact Us</a></li>
+                        <li><a href='{{ route('contact') }}'>Contact Us</a></li>
                         <li><a href='{{ route('blog') }}'>News & Updates</a></li>
                     </ul>
                 </nav>

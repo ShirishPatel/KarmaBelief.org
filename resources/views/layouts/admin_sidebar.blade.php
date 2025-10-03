@@ -115,7 +115,7 @@
 
         <!-- About Section -->
         <li
-            class="menu-item  {{ Request::routeIs('about-technologie.*', 'about-counter.*', 'our-progress-section.*', 'about-inquiry.*') ? 'open' : '' }}">
+            class="menu-item  {{ Request::routeIs('about-technologie.*', 'about-counter.*', 'our-progress-section.*', 'about-inquiry.*', 'donation-policy.*','certificates.*') ? 'open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-info-circle"></i>
                 <div class="text-truncate" data-i18n="About">About</div>
@@ -136,13 +136,68 @@
                         <div class="text-truncate" data-i18n="Our Progress">Our Progress</div>
                     </a>
                 </li>
+                <li class="menu-item {{ Request::routeIs('donation-policy.*') ? 'active' : '' }}">
+                    <a href="{{ route('donation-policy.index') }}" class="menu-link">
+                        <div class="text-truncate" data-i18n="Donation /Tex Exemption">Donation /Tex Exemption</div>
+                    </a>
+                </li>
+                <li class="menu-item {{ Request::routeIs('certificates.*') ? 'active' : '' }}">
+                    <a href="{{ route('certificates.index') }}" class="menu-link">
+                        <div class="text-truncate" data-i18n="certificates">Certificates</div>
+                    </a>
+                </li>
 
             </ul>
         </li>
+
+        <li class="menu-item  {{ Request::routeIs('event.*', 'gallery-categories.*') ? 'open' : '' }}">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-task"></i>
+                <div class="text-truncate" data-i18n="custom-development">Activities</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item {{ Request::routeIs('gallery-categories.*', 'galleries.*') ? 'active' : '' }}">
+                    <a href="{{ route('gallery-categories.index') }}" class="menu-link">
+                        <div class="text-truncate" data-i18n="gallery-categories">Gallery</div>
+                    </a>
+                </li>
+                <li class="menu-item {{ Request::routeIs('event.*') ? 'active' : '' }}">
+                    <a href="{{ route('event.index') }}" class="menu-link">
+                        <div class="text-truncate" data-i18n="event">Event</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="menu-item  {{ Request::routeIs('donate.*') ? 'open' : '' }}">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-group"></i>
+                <div class="text-truncate" data-i18n="custom-development">Get Involved</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item {{ Request::routeIs('donate.*') ? 'active' : '' }}">
+                    <a href="{{ route('donate.index') }}" class="menu-link">
+                        <div class="text-truncate" data-i18n="donate">Donate</div>
+                    </a>
+                </li>
+                {{-- <li class="menu-item {{ Request::routeIs('event.*') ? 'active' : '' }}">
+                    <a href="{{ route('event.index') }}" class="menu-link">
+                        <div class="text-truncate" data-i18n="event">Event</div>
+                    </a>
+                </li> --}}
+            </ul>
+        </li>
+
         <li class="menu-item d-none  {{ Request::routeIs('about-inquiry.*') ? 'active' : '' }}">
             <a href="{{ route('about-inquiry.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-category"></i>
                 <div class="text-truncate" data-i18n="About Inquiry">Inquiry Section</div>
+            </a>
+        </li>
+
+        <li class="menu-item {{ Request::routeIs('faq.*') ? 'active' : '' }}">
+            <a href="{{ route('faq.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-help-circle"></i>
+                <div class="text-truncate" data-i18n="Dashboard">Faq</div>
             </a>
         </li>
 
@@ -153,6 +208,7 @@
                 <div class="text-truncate" data-i18n="Blog Categories">Blog Categories</div>
             </a>
         </li>
+
 
         <!-- Blogs -->
         <li class="menu-item {{ Request::routeIs('blogs.*') ? 'active' : '' }}">

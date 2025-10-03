@@ -31,7 +31,7 @@
                             <div class="image">
                                 <img src="{{ asset('storage/' . $blog->featured_image) }}" alt="image">
                             </div>
-                            <div class="info">
+                            <div class="info d-none">
                                 <ul>
                                     <li>
                                         <svg class="me1" width="14" height="18" viewBox="0 0 14 18" fill="none"
@@ -71,7 +71,7 @@
                                     </li>
                                 </ul>
                             </div>
-                            <div class="blog-details">
+                            <div class="blog-details" style="margin-top: 40px">
                                 <h2>{{ $blog->blog_title }}</h2>
                                 <div class="blog-content">
                                     {!! $blog->blog_description !!}
@@ -96,30 +96,64 @@
                                 </button>
                             </div>
                         </div>
-                        <div class="item mb-40">
-                            <h4>Recent Posts</h4>
-                            <ul>
-                                <li class="mb-20">
-                                    <a class='fs-18 fw-500 primary-hover' href='blog-details.html'>Why Is Blog
-                                        SEO
-                                        Important?</a>
-                                    <span>January 05, 2024</span>
-                                </li>
-                                <li class="mb-20">
-                                    <a class='fs-18 fw-500 primary-hover' href='blog-details.html'>Write for
-                                        humans,
-                                        not search engines</a>
-                                    <span>January 02, 2024</span>
-                                </li>
-                                <li>
-                                    <a class='fs-18 fw-500 primary-hover' href='blog-details.html'>The Basics of
-                                        SEO
-                                        Content Writing</a>
-                                    <span>December 27, 2023</span>
-                                </li>
+                         @php
+
+                            $categories = DB::table('blog_categories')->where('status', '1')->get();
+                        @endphp
+                        <div class="sofax-subscription-field-categories ">
+                            <h4>Categories:</h4>
+                            <ul style="max-height: 200px; overflow-y: auto;">
+                                @foreach ($categories as $category)
+                                    <li>
+                                        <a href="{{ route('blog-cat-show', $category->category_slug) }}">
+                                            {{ $category->category_name }}
+                                        </a>
+                                    </li>
+                                @endforeach
                             </ul>
                         </div>
-                        <div class="item category mb-40">
+                        @php
+                            $recentPost = DB::table('blogs')
+                                ->where('status', '1')
+                                ->orderBy('created_at', 'desc')
+                                ->limit(3)
+                                ->get();
+                        @endphp
+                        {{-- <div class="item mb-40">
+                            <h4>Recent Posts</h4>
+                            <ul>
+                                @foreach ($recentPost as $recent)
+                                    <li class="mb-20">
+                                        <a
+                                            href="{{ route('blog-details', $recent->blog_slug) }}">{{ $recent->blog_title }}</a>
+                                        <span>{{ date('d M Y', strtotime($recent->created_at)) }}</span>
+
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div> --}}
+                         <div class="sofax-subscription-field-post">
+                            <h4>Recent Posts:</h4>
+                            @foreach ($recentPost->take(5) as $recent)
+                                <a href="{{ route('blog-details', $recent->blog_slug) }}">
+                                    <div class="title-post-thumb">
+                                        <div class="title-post-img">
+                                            <img src="{{ asset('storage/' . $recent->featured_image) }}"
+                                                alt="{{ $recent->blog_title }}">
+                                        </div>
+                                        <div class="title-post-content">
+                                            <ul>
+                                                {{-- <li>{{ $recent->created_at->format('d M, Y') }}</li> --}}
+                                                <li>{{ \Carbon\Carbon::parse($recent->created_at)->format('d M, Y') }}</li>
+                                            </ul>
+                                            <h6>{{ Str::limit($recent->blog_title, 50) }}</h6>
+                                        </div>
+                                    </div>
+                                </a>
+                            @endforeach
+                        </div>
+
+                        <div class="item category mb-40 d-none">
                             <h4>Category</h4>
                             <ul>
                                 <li class="mb-25">
@@ -143,15 +177,16 @@
                                 </li>
                             </ul>
                         </div>
-                        <div class="item mb-40">
+                       
+                        {{-- <div class="item mb-40">
                             <h4>Tags</h4>
                             <div class="tags">
                                 @foreach ($categories as $cat)
                                     <a href="#0">{{ $cat }}</a>
                                 @endforeach
                             </div>
-                        </div>
-                        <div class="item newsletter">
+                        </div> --}}
+                        <div class="item newsletter d-none">
                             <h4>Newsletter</h4>
                             <input type="text" placeholder="Enter your email">
                             <button>Subscribe<i class="fa-regular fa-arrow-right"></i></button>
@@ -219,7 +254,7 @@
     @endphp
 
     @if ($record && ($record->heading || $record->description || $record->btn_label || $record->btn_link))
-        <section class="book-area">
+        <section class="book-area d-none">
             <div class="container">
                 <div class="book__wrp">
                     <div class="book__item">

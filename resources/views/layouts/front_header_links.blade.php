@@ -1,4 +1,6 @@
 <!-- Bootstrap min css -->
+<link rel="stylesheet" href="{{ asset('assets/css/app.css') }}">
+
 <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
 <!-- Mean menu css -->
 <link rel="stylesheet" href="{{ asset('assets/css/meanmenu.css') }}">

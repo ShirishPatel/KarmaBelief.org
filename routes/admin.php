@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AboutCounterController;
 use App\Http\Controllers\AboutInquiryController;
+use App\Http\Controllers\AboutPageController;
 use App\Http\Controllers\AboutTechnologieController;
 use App\Http\Controllers\AiMlHomeHeroController;
 use App\Http\Controllers\AiMlHomeHeroGalleryController;
@@ -12,11 +13,17 @@ use App\Http\Controllers\BlogCategoriesController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CaseStudyCategoryController;
 use App\Http\Controllers\CaseStudyTechnologyController;
+use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\ClientStoriesController;
 use App\Http\Controllers\ConfigurationController;
 use App\Http\Controllers\CustomDevelopmentHomeHeroController;
 use App\Http\Controllers\CustomDevelopmentProcessController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DonateController;
+use App\Http\Controllers\EventController;
+use App\Http\Controllers\FaqController;
+use App\Http\Controllers\GalleryCategoryController;
+use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\HomeHeroSectionController;
 use App\Http\Controllers\NewsLetterController;
 use App\Http\Controllers\OurProgressController;
@@ -53,10 +60,6 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::post('testimonial/status/{id}', [TestimonialController::class, 'status'])->name('testimonial.status');
     Route::post('testimonial/poster/store', [TestimonialController::class, 'posterstore'])->name('testimonials-poster.store');
 
-    // Blog Routes
-    Route::resource('blogs', BlogController::class);
-    Route::post('blogs/status/{id}', [BlogController::class, 'status'])->name('blogs.status');
-
     // Contact Us Routes
     Route::get('news-letter', [NewsLetterController::class, 'index'])->name('newsletter');
     Route::delete('news-letter/destroy/{id}', [NewsLetterController::class, 'destroy'])->name('contact.destroy');
@@ -80,6 +83,9 @@ Route::prefix('admin')->middleware('auth')->group(function () {
 
     //About Us
     Route::resource('about-company', AboutTechnologieController::class)->names('about-technologie');
+
+    Route::resource('donation-policy', AboutPageController::class)->names('donation-policy');
+    Route::put('/donation-policy/status/{id}', [AboutPageController::class, 'status'])->name('donation-policy.status');
 
     //Mission / vision
     Route::post('mission-vission/store', [AboutCounterController::class, 'missionstore'])->name('mission-vission.missionstore');
@@ -110,6 +116,9 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     //award and
     Route::resource('award-testimonial', AwardTestimonialsController::class);
 
+    // Blog Routes
+    Route::resource('blogs', BlogController::class);
+    Route::post('blogs/status/{id}', [BlogController::class, 'status'])->name('blogs.status');
     Route::resource('blog-categories', BlogCategoriesController::class);
     Route::put('blog-category/status/{id}', [BlogCategoriesController::class, 'toggleStatus'])->name('blog-category.toggleStatus');
 
@@ -147,5 +156,19 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::resource('terms-policy', TermPolicyController::class);
     Route::post('terms-policy/status/{id}', [TermPolicyController::class, 'status'])->name('terms_policy.status');
 
+    Route::resource('faq', FaqController::class)->names('faq');
+    Route::post('faq/status/{id}', [FaqController::class, 'status'])->name('faq.status');
 
+    Route::resource('event', EventController::class)->names('event');
+    Route::put('/event/status/{id}', [EventController::class, 'status'])->name('event.status');
+
+    Route::resource('gallery-categories', GalleryCategoryController::class)->names('gallery-categories');
+    Route::put('gallery-categories/status/{id}', [GalleryCategoryController::class, 'toggleStatus'])->name('gallery-categories.toggleStatus');
+    Route::resource('galleries', GalleryController::class)->names('galleries');
+    Route::post('galleries/status/{id}', [GalleryController::class, 'status'])->name('galleries.status');
+
+    Route::resource('donate', DonateController::class)->names('donate');
+    Route::put('donate/status/{id}', [DonateController::class, 'status'])->name('donate.status');
+    Route::resource('certificates', CertificateController::class)->names('certificates');
+    Route::put('certificates/status/{id}', [CertificateController::class, 'status'])->name('certificates.status');
 });

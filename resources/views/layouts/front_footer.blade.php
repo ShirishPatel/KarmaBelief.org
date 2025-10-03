@@ -52,24 +52,24 @@
                         <a href='{{ route('contact') }}'>Contact Us</a>
                     </li>
                     <li>
-                        <a href='{{ route('contact') }}'>News & Updates</a>
+                        <a href='{{ route('blog') }}'>News & Updates</a>
                     </li>
                     <li>
-                        <a href='{{ route('contact') }}'>Tax Exemption</a>
+                        <a href='{{ route('tex-exemption') }}'>Tax Exemption</a>
                     </li>
                     <li>
-                        <a href='{{ route('contact') }}'>Donation Policy</a>
+                        <a href='{{ route('donation-policy') }}'>Donation Policy</a>
                     </li>
                 </ul>
             </div>
             <div class="footer__item">
                 <h3>Quick Links</h3>
                 <ul>
-                    <li><a href='#'>Causes</a></li>
-                    <li><a href='#'>Events</a></li>
-                    <li><a href='#'>Certificates</a></li>
-                    <li><a href='#'>Donate</a></li>
-                    <li><a href='#'>Gallery</a></li>
+                    <li><a href='{{ route('causes') }}'>Causes</a></li>
+                    <li><a href='{{ route('event') }}'>Events</a></li>
+                    <li><a href='{{ route('certificate') }}'>Certificates</a></li>
+                    <li><a href='{{ route('donate') }}'>Donate</a></li>
+                    <li><a href='{{ route('gallery') }}'>Gallery</a></li>
                 </ul>
             </div>
             <div class="footer__item">

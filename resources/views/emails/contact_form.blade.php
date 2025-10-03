@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>New Contact Form Submission</title>
+    <title>New Email</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -23,7 +23,7 @@
         }
 
         .header {
-            background-color: #D85216;
+            background-color: #012d85;
             color: white;
             text-align: center;
             padding: 15px;
@@ -42,7 +42,7 @@
         }
 
         .content strong {
-            color: #D85216;
+            color: #012d85;
         }
 
         .footer {
@@ -55,7 +55,7 @@
 
         .button {
             display: inline-block;
-            background: #D85216;
+            background: #012d85;
             color: white;
             text-decoration: none;
             padding: 10px 20px;
@@ -86,10 +86,9 @@
             <p><strong>Name:</strong> {{ $data['name'] }}</p>
             <p><strong>Email:</strong> {{ $data['email'] }}</p>
             <p><strong>Phone:</strong> {{ $data['phone'] }}</p>
-            <p><strong>Subject Name:</strong> {{ $data['subject_name'] }}</p>
+            <p><strong>Subject:</strong> {{ $data['subject_name'] }}</p>
             <p><strong>Message:</strong></p>
             <p style="background: #FFE2DA; padding: 10px; border-radius: 5px;">{{ $data['massage'] }}</p>
-
             <center>
                 <a href="mailto:{{ $data['email'] }}" class="button">Reply to {{ $data['name'] }}</a>
             </center>

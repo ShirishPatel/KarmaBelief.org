@@ -27,7 +27,8 @@
                                         <input type="file" id="site_logo_light" name="site_logo_light"
                                             class="account-file-input" hidden accept="image/png, image/jpeg" />
                                     </label>
-                                    <button type="button" class="btn btn-outline-secondary account-image-reset mb-4 btn-sm">
+                                    <button type="button"
+                                        class="btn btn-outline-secondary account-image-reset mb-4 btn-sm">
                                         <i class="bx bx-reset d-block d-sm-none"></i>
                                         <span class="d-none d-sm-block">Reset</span>
                                     </button>
@@ -52,7 +53,8 @@
                                         <input type="file" id="site_logo_dark" name="site_logo_dark"
                                             class="account-file-input" hidden accept="image/png, image/jpeg" />
                                     </label>
-                                    <button type="button" class="btn btn-outline-secondary account-image-reset mb-4 btn-sm">
+                                    <button type="button"
+                                        class="btn btn-outline-secondary account-image-reset mb-4 btn-sm">
                                         <i class="bx bx-reset d-block d-sm-none"></i>
                                         <span class="d-none d-sm-block">Reset</span>
                                     </button>
@@ -74,10 +76,11 @@
                                     <label for="favicon" class="btn btn-primary me-3 mb-4 btn-sm">
                                         <span class="d-none d-sm-block">Favicon icon</span>
                                         <i class="bx bx-upload d-block d-sm-none"></i>
-                                        <input type="file" name="favicon" id="favicon" class="account-file-input" hidden
-                                            accept="image/png, image/jpeg" />
+                                        <input type="file" name="favicon" id="favicon" class="account-file-input"
+                                            hidden accept="image/png, image/jpeg" />
                                     </label>
-                                    <button type="button" class="btn btn-outline-secondary account-image-reset mb-4 btn-sm">
+                                    <button type="button"
+                                        class="btn btn-outline-secondary account-image-reset mb-4 btn-sm">
                                         <i class="bx bx-reset d-block d-sm-none"></i>
                                         <span class="d-none d-sm-block">Reset</span>
                                     </button>
@@ -118,8 +121,8 @@
                         <div class="col mb-3">
                             <div class="form-group">
                                 <label class="form-label" for="site_description">Description</label>
-                                <textarea type="text" name="site_description" rows="2" class="form-control"
-                                    id="site_description" placeholder="">{{ $records->site_description ?? '' }}</textarea>
+                                <textarea type="text" name="site_description" rows="2" class="form-control" id="site_description"
+                                    placeholder="">{{ $records->site_description ?? '' }}</textarea>
                                 <span class="text-danger">{{ $errors->first('site_description') }}</span>
                             </div>
                         </div>
@@ -132,8 +135,8 @@
                             </div>
                             <div class="col">
                                 <label for="social_twitter" class="form-label">Twitter</label>
-                                <input class="form-control" type="social_twitter" name="social_twitter" id="social_twitter"
-                                    value="{{ $records->social_twitter ?? '' }}" />
+                                <input class="form-control" type="social_twitter" name="social_twitter"
+                                    id="social_twitter" value="{{ $records->social_twitter ?? '' }}" />
                                 <span class="text-danger">{{ $errors->first('social_twitter') }}</span>
                             </div>
                             <div class="col">
@@ -155,8 +158,8 @@
                                 <div
                                     class="col d-flex flex-column align-items-start align-items-sm-start gap-6 pb-4 border-bottom">
                                     @if (!empty($records->footer_business_image))
-                                        <img src="{{ asset('storage/' . $records->footer_business_image) }}" alt="Site Logo"
-                                            class="d-block w-auto h-px-100 rounded border">
+                                        <img src="{{ asset('storage/' . $records->footer_business_image) }}"
+                                            alt="Site Logo" class="d-block w-auto h-px-100 rounded border">
                                     @else
                                         <img src="{{ asset('assets/backend/img/avatars/1.png') }}" alt="user-avatar"
                                             class="d-block w-auto h-px-100 rounded border" id="" />
@@ -184,8 +187,7 @@
                                     <label class="form-label" for="footer_business_description">Footer Business
                                         Description</label>
                                     <textarea type="text" name="footer_business_description" rows="8" class="form-control"
-                                        id="footer_business_description"
-                                        placeholder="">{{ $records->footer_business_description ?? '' }}</textarea>
+                                        id="footer_business_description" placeholder="">{{ $records->footer_business_description ?? '' }}</textarea>
                                     <span class="text-danger">{{ $errors->first('footer_business_description') }}</span>
                                 </div>
                             </div>
@@ -228,6 +230,107 @@
                                 <span class="text-danger">{{ $errors->first('from_email') }}</span>
                             </div>
                         </div>
+                        <div class="card-body pt-4 mt-4 border-top">
+                            <h5 class="mb-3 fw-bold text-primary">
+                                <i class="bx bx-bank me-1"></i> Account Details
+                            </h5>
+                            <div class="row row-cols-1 row-cols-md-2 g-3 mb-3">
+
+                                <div class="col d-flex flex-column align-items-start gap-6 pb-4 border-bottom">
+                                    @if (!empty($records->phone_pay))
+                                        <img src="{{ asset('storage/' . $records->phone_pay) }}" alt="Account Image 1"
+                                            class="d-block w-auto h-px-100 rounded border">
+                                    @else
+                                        <img src="{{ asset('assets/backend/img/avatars/1.png') }}" alt="placeholder"
+                                            class="d-block w-auto h-px-100 rounded border" />
+                                    @endif
+                                    <div class="button-wrapper">
+                                        <label for="phone_pay" class="btn btn-primary me-3 mb-4 btn-sm">
+                                            <span class="d-none d-sm-block">Phone Pay</span>
+                                            <i class="bx bx-upload d-block d-sm-none"></i>
+                                            <input type="file" id="phone_pay" name="phone_pay" hidden
+                                                class="account-file-input" accept="image/png, image/jpeg" />
+                                        </label>
+                                        <button type="button"
+                                            class="btn btn-outline-secondary account-image-reset mb-4 btn-sm">
+                                            <span class="d-none d-sm-block">Reset</span>
+                                        </button>
+                                        <div class="small text-danger">Allowed JPG, JPEG or PNG.</div>
+                                        <x-image-size> 300px X 200px</x-image-size>
+                                    </div>
+                                </div>
+
+                                <div class="col d-flex flex-column align-items-start gap-6 pb-4 border-bottom">
+                                    @if (!empty($records->google_pay))
+                                        <img src="{{ asset('storage/' . $records->google_pay) }}" alt="Account Image 2"
+                                            class="d-block w-auto h-px-100 rounded border">
+                                    @else
+                                        <img src="{{ asset('assets/backend/img/avatars/1.png') }}" alt="placeholder"
+                                            class="d-block w-auto h-px-100 rounded border" />
+                                    @endif
+                                    <div class="button-wrapper">
+                                        <label for="google_pay" class="btn btn-primary me-3 mb-4 btn-sm">
+                                            <span class="d-none d-sm-block">Google pay</span>
+                                            <i class="bx bx-upload d-block d-sm-none"></i>
+                                            <input type="file" id="google_pay" name="google_pay" hidden
+                                                class="account-file-input" accept="image/png, image/jpeg" />
+                                        </label>
+                                        <button type="button"
+                                            class="btn btn-outline-secondary account-image-reset mb-4 btn-sm">
+                                            <span class="d-none d-sm-block">Reset</span>
+                                        </button>
+                                        <div class="small text-danger">Allowed JPG, JPEG or PNG.</div>
+                                        <x-image-size> 300px X 200px</x-image-size>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row row-cols-1 row-cols-md-2 g-3 mb-3">
+                                <div class="col">
+                                    <label for="bank_name" class="form-label">Bank Name<x-required /></label>
+                                    <input class="form-control" type="text" id="bank_name" name="bank_name"
+                                        value="{{ $records->bank_name ?? '' }}" />
+                                    <span class="text-danger">{{ $errors->first('bank_name') }}</span>
+                                </div>
+
+                                <div class="col">
+                                    <label for="ac_holder_name" class="form-label">Account Holder
+                                        Name<x-required /></label>
+                                    <input class="form-control" type="text" id="ac_holder_name" name="ac_holder_name"
+                                        value="{{ $records->ac_holder_name ?? '' }}" />
+                                    <span class="text-danger">{{ $errors->first('ac_holder_name') }}</span>
+                                </div>
+
+                                <div class="col">
+                                    <label for="ac_number" class="form-label">Account Number<x-required /></label>
+                                    <input class="form-control" type="text" id="ac_number" name="ac_number"
+                                        value="{{ $records->ac_number ?? '' }}" />
+                                    <span class="text-danger">{{ $errors->first('ac_number') }}</span>
+                                </div>
+
+                                <div class="col">
+                                    <label for="bank_branch" class="form-label">Bank Branch</label>
+                                    <input class="form-control" type="text" id="bank_branch" name="bank_branch"
+                                        value="{{ $records->bank_branch ?? '' }}" />
+                                    <span class="text-danger">{{ $errors->first('bank_branch') }}</span>
+                                </div>
+
+                                <div class="col">
+                                    <label for="ac_type" class="form-label">Account Type</label>
+                                    <input class="form-control" type="text" id="ac_type" name="ac_type"
+                                        value="{{ $records->ac_type ?? '' }}" />
+                                    <span class="text-danger">{{ $errors->first('ac_type') }}</span>
+                                </div>
+
+                                <div class="col">
+                                    <label for="ifsc_code" class="form-label">IFSC Code</label>
+                                    <input class="form-control" type="text" id="ifsc_code" name="ifsc_code"
+                                        value="{{ $records->ifsc_code ?? '' }}" />
+                                    <span class="text-danger">{{ $errors->first('ifsc_code') }}</span>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="mt-6">
                             <button type="submit" class="btn btn-primary me-3">Save changes</button>
                         </div>

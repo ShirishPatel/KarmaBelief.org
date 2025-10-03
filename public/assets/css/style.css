@@ -32,7 +32,7 @@ CSS TABLE OF CONTENTS
 :root {
   --space-grotesk: "Roboto", sans-serif;
   --inter: "Roboto", sans-serif;
-  --primary-color: #215846;
+  --primary-color: #012d85;
   --secondary-color: #101b17;
   --tertiary-color: #235947;
   /* --yellow-color: #fb6f13; */
@@ -52,7 +52,7 @@ CSS TABLE OF CONTENTS
   --black: #000000;
   --transition: all 0.4s ease-in-out;
   --shadow: 0px 4px 25px 0px #0000000f;
-  --main-blue:#0f3775;
+  --main-blue:#012d85;
 }
 .main-blue{
     color: var(--main-blue);

@@ -19,3 +19,15 @@ function getPages(){
         'case-studies' => 'Case Studies'
     ];
 }
+if (! function_exists('display')) {
+    function display()
+    {
+        return [
+            'tex-exemption'    => 'Tex Exemption',
+            'donation-policy'   => 'Donation Policy',
+            'causes'   => 'Causes',
+            'donate'   => 'Donate',
+            'certificates'   => 'Certificates',
+        ];
+    }
+}
