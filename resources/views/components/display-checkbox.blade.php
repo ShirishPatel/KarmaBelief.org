@@ -49,7 +49,6 @@
                 });
             });
 
-            // Check if all pages are initially selected
             selectAllCheckbox.checked = Array.from(pageCheckboxes).every(checkbox => checkbox.checked);
         });
     </script>

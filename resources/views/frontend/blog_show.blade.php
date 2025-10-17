@@ -96,7 +96,7 @@
                                 </button>
                             </div>
                         </div>
-                         @php
+                        @php
 
                             $categories = DB::table('blog_categories')->where('status', '1')->get();
                         @endphp
@@ -132,7 +132,7 @@
                                 @endforeach
                             </ul>
                         </div> --}}
-                         <div class="sofax-subscription-field-post">
+                        <div class="sofax-subscription-field-post">
                             <h4>Recent Posts:</h4>
                             @foreach ($recentPost->take(5) as $recent)
                                 <a href="{{ route('blog-details', $recent->blog_slug) }}">
@@ -177,7 +177,7 @@
                                 </li>
                             </ul>
                         </div>
-                       
+
                         {{-- <div class="item mb-40">
                             <h4>Tags</h4>
                             <div class="tags">
@@ -200,7 +200,7 @@
 
     <!-- Blog area start here -->
     @php
-        $blogs = DB::table('blogs')->where('status', '1')->latest()->take(3)->get();
+        $blogs = DB::table('blogs')->where('status', '1')->inRandomOrder()->latest()->take(3)->get();
     @endphp
 
     <section class="blog-area pb-120">
@@ -209,40 +209,56 @@
                 <h2 class="fw-300">More Blog and News</h2>
             </div>
 
-            <div class="row g-4">
+            <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4">
                 @foreach ($blogs as $blog)
                     @php
                         $categoryIds = explode(',', $blog->category_id);
                         $categories = DB::table('blog_categories')->whereIn('id', $categoryIds)->pluck('category_name');
                     @endphp
 
-                    <div class="col-xl-4 col-md-6">
-                        <div class="blog__item">
-                            <div class="blog__image image" style="position: relative;">
-                                <img src="{{ asset('storage/' . $blog->featured_image) }}" alt="Blog Image"
-                                    style="height: 400px;">
-                                <div class="tag"
-                                    style="position: absolute; top: 10px; left: 10px; right: 10px; display: flex; flex-wrap: wrap; gap: 5px;">
-                                    @foreach ($categories as $cat)
-                                        <a href="#"
-                                            style="padding: 3px 8px; background: #fff; border-radius: 5px; font-size: 13px; text-decoration: none;">
-                                            {{ $cat }}
-                                        </a>
-                                    @endforeach
+                    <div class="col">
+                        <div class="blog__item h-100 d-flex flex-column justify-content-between shadow-sm p-3 rounded"
+                            style="border: 1px solid #eee;">
+                            <div>
+                                <div class="blog__image image position-relative">
+                                    <img src="{{ asset('storage/' . $blog->featured_image) }}" alt="Blog Image"
+                                        style="height: 250px; width: 100%; object-fit: cover; border-radius: 8px;">
+                                    <div class="tag position-absolute top-0 start-0 p-2 d-flex flex-wrap gap-2">
+                                        @foreach ($categories as $cat)
+                                            <a href="#"
+                                                style="padding: 3px 8px; background: #fff; border-radius: 5px; font-size: 12px; text-decoration: none; color:#000;">
+                                                {{ $cat }}
+                                            </a>
+                                        @endforeach
+                                    </div>
                                 </div>
+
+                                <h4 class="mt-3 mb-3">
+                                    <a class="primary-hover text-dark"
+                                        href="{{ route('blog-details', $blog->blog_slug) }}">
+                                        {{ $blog->blog_title }}
+                                    </a>
+                                </h4>
                             </div>
-                            <h4 class="mt-10 mb-20">
-                                <a class="primary-hover" href="{{ route('blog-details', $blog->blog_slug) }}">
-                                    {{ $blog->blog_title }}
+
+                            <div class="mt-auto">
+                                <a class="fs-18 blog-btn text-font" href="{{ route('blog-details', $blog->blog_slug) }}"
+                                    style="background: linear-gradient(238.89deg, #0199e4 19.48%, #012d85 68.82%);
+                              color: #fff !important;
+                              padding: 8px 24px;
+                              border-radius: 12px;
+                              text-decoration: none;
+                              display: inline-block;
+                              transition: 0.3s;">
+                                    Read More <i class="fa-light ms-1 fa-arrow-right"></i>
                                 </a>
-                            </h4>
-                            <a class="fs-18 blog-btn text-font" href="{{ route('blog-details', $blog->blog_slug) }}">
-                                Read More <i class="fa-light ms-1 fa-arrow-right"></i>
-                            </a>
+                            </div>
+
                         </div>
                     </div>
                 @endforeach
             </div>
+
         </div>
     </section>
 

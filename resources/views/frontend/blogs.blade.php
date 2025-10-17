@@ -48,7 +48,7 @@
                                 <div class="sofax-inner-blog-meta">
                                     <a href="{{ route('blog-cat-show', $blog->category_slug) }}">
                                         <h5>{{ $blog->category_name }}</h5>
-                                        <ul>   
+                                        <ul>
                                             <li>{{ \Carbon\Carbon::parse($blog->created_at)->format('d M, Y') }}</li>
                                         </ul>
                                     </a>
@@ -83,26 +83,28 @@
                                     <h5 class="d-inline">
                                         @foreach ($categoriess as $category)
                                             <a href="{{ route('blog-cat-show', $category->category_slug) }}"
-                                                class="d-inline badge bg-dark text-white me-2" style="padding:3%">
+                                                class="d-inline badge me-2"
+                                                style="background-color: #000000; color: #fff; padding: 13px 16px; font-size: 0.95rem; font-weight: 600; line-height: 3.3;">
                                                 {{ $category->category_name }}
                                             </a>
-                                            @if (!$loop->last)
-
-                                            @endif
                                         @endforeach
                                         {{ \Carbon\Carbon::parse($blog->created_at)->format('d M, Y') }}
                                     </h5>
                                 </div>
 
+
                                 <div class="sofax-inner-blog-text mt-3">
                                     <a href="{{ route('blog-details', $blog->blog_slug) }}">
                                         <h3>{{ $blog->blog_title }}</h3>
                                     </a>
-                                    <p>{{ Str::limit($blog->blog_description, 150) }}</p>
+                                    <div class="WaaZC">
+                                        {!! Str::words(strip_tags($blog->blog_description), 40, '...') !!}
+                                    </div>
+
                                 </div>
-                                <a class="sofax-icon-btn sofax-blog-icon-btn"
+                                <a class="sofax-icon-btn sofax-blog-icon-btn" style="margin-top: 30px"
                                     href="{{ route('blog-details', $blog->blog_slug) }}">
-                                    Learn More <img src="assets/images/v1/arrow-right.png" alt="">
+                                    Learn More&nbsp; <i class="fas fa-arrow-right"></i>
                                 </a>
                             </div>
                         </div>
@@ -404,6 +406,32 @@
     @endif --}}
 
     <!-- Book area end here -->
+    @php
+        $record = DB::table('cta_buttons')->wherejsonContains('is_display', 'blog')->where('status', '1')->first();
+    @endphp
+
+    @if ($record && ($record->heading || $record->description || $record->btn_label || $record->btn_link))
+        <section class="book-area">
+            <div class="container">
+                <div class="book__wrp">
+                    <div class="book__item">
+                        <h2>{{ $record->heading ?? '' }}
+                        </h2>
+                        <p class="mt-20 mb-25">
+                            {{ $record->description ?? '' }}
+                        </p>
+                        <a href="{{ $record->btn_link ?? '#' }}"
+                            class="btn-two border-none ">{{ $record->btn_label ?? '' }}
+                            <span>
+                                <i class="fa-regular fa-arrow-up-right arry1"></i>
+                                <i class="fa-regular fa-arrow-up-right arry2"></i>
+                            </span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    @endif
 @endsection
 
 @push('frontend_scripts')

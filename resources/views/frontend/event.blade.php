@@ -144,7 +144,8 @@
             <div class="banner-inner__content">
                 <h2 class="fw-bold text-capitalize mb-3">Events</h2>
                 <div class="mx-auto mb-4"
-                    style="width: 120px; height: 4px; background: linear-gradient(90deg, #0199e4, #012d85);"></div>
+                    style="width: 120px; height: 4px; background: linear-gradient(238.89deg, #0199e4 19.48%, #012d85 68.82%);">
+                </div>
             </div>
         </div>
     </section>
@@ -162,10 +163,12 @@
                             <h5 class="event-title">{{ $event->title }}</h5>
 
                             <p class="event-desc flex-grow-1">
-                                {{ Str::limit(strip_tags($event->event_desc), 100, '...') }}
+                                {{-- {{ Str::limit(strip_tags($event->event_desc), 100, '...') }} --}}
+                                    {!! Str::words(strip_tags($event->event_desc), 14, '...') !!}
                             </p>
 
-                            <a href="{{ route('event-details', $event->event_slug) }}" class="event-linkd mt-auto">
+                            <a href="{{ route('event-details', $event->event_slug) }}" class="event-linkd mt-auto"
+                                style="background: linear-gradient(238.89deg, #0199e4 19.48%, #012d85 68.82%); ">
                                 Read More
                             </a>
                         </div>
@@ -179,7 +182,31 @@
             @endforelse
         </div>
     </div>
+    @php
+        $record = DB::table('cta_buttons')->wherejsonContains('is_display', 'events')->where('status', '1')->first();
+    @endphp
 
+    @if ($record && ($record->heading || $record->description || $record->btn_label || $record->btn_link))
+        <section class="book-area">
+            <div class="container">
+                <div class="book__wrp">
+                    <div class="book__item">
+                        <h2>{{ $record->heading ?? '' }}
+                        </h2>
+                        <p class="mt-20 mb-25">
+                            {{ $record->description ?? '' }}
+                        </p>
+                        <a href="{{ $record->btn_link ?? '#' }}" class="btn-two border-none ">{{ $record->btn_label ?? '' }}
+                            <span>
+                                <i class="fa-regular fa-arrow-up-right arry1"></i>
+                                <i class="fa-regular fa-arrow-up-right arry2"></i>
+                            </span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    @endif
 @endsection
 
 @push('frontend_scripts')

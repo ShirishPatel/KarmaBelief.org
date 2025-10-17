@@ -16,6 +16,7 @@ use App\Http\Controllers\CaseStudyTechnologyController;
 use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\ClientStoriesController;
 use App\Http\Controllers\ConfigurationController;
+use App\Http\Controllers\CtaButtonController;
 use App\Http\Controllers\CustomDevelopmentHomeHeroController;
 use App\Http\Controllers\CustomDevelopmentProcessController;
 use App\Http\Controllers\DashboardController;
@@ -171,4 +172,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::put('donate/status/{id}', [DonateController::class, 'status'])->name('donate.status');
     Route::resource('certificates', CertificateController::class)->names('certificates');
     Route::put('certificates/status/{id}', [CertificateController::class, 'status'])->name('certificates.status');
+
+    Route::resource('cta', CtaButtonController::class)->names('cta');
+     Route::put('cta/status/{id}', [CtaButtonController::class, 'status'])->name('cta.status');
 });

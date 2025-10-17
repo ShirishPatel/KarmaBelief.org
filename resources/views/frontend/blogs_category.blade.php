@@ -31,7 +31,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8">
-                    @forelse ($blogs as $blog)
+                    {{-- @forelse ($blogs as $blog)
                         <div class="sofax-inner-blog-wrap wow fadeInUpX">
                             <div class="sofax-inner-blog-img">
                                 <img src="{{ asset('storage/' . $blog->featured_image) }}" alt="{{ $blog->blog_title }}">
@@ -42,7 +42,7 @@
                                         <h5>{{ $blog->category_name }}</h5>
 
                                         <ul>
-                                            {{-- <li>{{ $blog->created_at->format('d M, Y') }}</li> --}}
+
                                             <li>{{ \Carbon\Carbon::parse($blog->created_at)->format('d M, Y') }}</li>
 
                                         </ul>
@@ -57,6 +57,52 @@
                                 <a class="sofax-icon-btn sofax-blog-icon-btn"
                                     href="{{ route('blog-details', $blog->blog_slug) }}">
                                     Learn More <img src="assets/images/v1/arrow-right.png" alt="">
+                                </a>
+                            </div>
+                        </div>
+                    @empty
+                        <div class="alert alert-info text-center">
+                            No blogs available For This Category.
+                        </div>
+                    @endforelse --}}
+                    @forelse ($blogs as $blog)
+                        @php
+                            $categoryIds = explode(',', $blog->category_id);
+
+                            $categoriess = DB::table('blog_categories')
+                                ->whereIn('id', $categoryIds)
+                                ->get(['category_name', 'category_slug']);
+                        @endphp
+                        <div class="sofax-inner-blog-wrap wow fadeInUpX">
+                            <div class="sofax-inner-blog-img">
+                                <img src="{{ asset('storage/' . $blog->featured_image) }}" alt="{{ $blog->blog_title }}">
+                            </div>
+                            <div class="sofax-inner-blog-content">
+                               <div class="sofax-inner-blog-meta" style="margin-top: 20px">
+                                    <h5 class="d-inline">
+                                        @foreach ($categoriess as $category)
+                                            <a href="{{ route('blog-cat-show', $category->category_slug) }}"
+                                                class="d-inline badge me-2"
+                                                style="background-color: #000000; color: #fff; padding: 13px 16px; font-size: 0.95rem; font-weight: 600; line-height: 3.3;">
+                                                {{ $category->category_name }}
+                                            </a>
+                                        @endforeach
+                                        {{ \Carbon\Carbon::parse($blog->created_at)->format('d M, Y') }}
+                                    </h5>
+                                </div>
+
+                                <div class="sofax-inner-blog-text mt-3">
+                                    <a href="{{ route('blog-details', $blog->blog_slug) }}">
+                                        <h3>{{ $blog->blog_title }}</h3>
+                                    </a>
+                                    <div class="WaaZC">
+                                        {!! Str::words(strip_tags($blog->blog_description), 40, '...') !!}
+                                    </div>
+
+                                </div>
+                                <a class="sofax-icon-btn sofax-blog-icon-btn" style="margin-top: 30px"
+                                    href="{{ route('blog-details', $blog->blog_slug) }}">
+                                    Learn More&nbsp; <i class="fas fa-arrow-right"></i>
                                 </a>
                             </div>
                         </div>
@@ -91,7 +137,10 @@
 
                         <div class="sofax-subscription-field-post">
                             <h4>Recent Posts:</h4>
-                            @foreach ($blogs->take(5) as $recent)
+                            @php
+                                 $recentPosts = DB::table('blogs')->where('status', '1')->orderBy('created_at', 'desc')->limit(4)->get();
+                            @endphp
+                            @foreach ($recentPosts as $recent)
                                 <a href="{{ route('blog-details', $recent->blog_slug) }}">
                                     <div class="title-post-thumb">
                                         <div class="title-post-img">

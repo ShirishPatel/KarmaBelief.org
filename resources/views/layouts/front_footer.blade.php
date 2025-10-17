@@ -1,5 +1,5 @@
 <!-- Book area start here -->
-@php
+{{-- @php
     $record = DB::table('about_inquiry')->first();
 @endphp
 
@@ -24,7 +24,7 @@
             </div>
         </div>
     </section>
-@endif
+@endif --}}
 
 <!-- Book area end here -->
 

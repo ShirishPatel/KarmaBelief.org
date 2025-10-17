@@ -1,11 +1,11 @@
 @extends('layouts.admin')
-@section('title', 'Donation')
+@section('title', 'Cta')
 @section('backend_content')
     <div class="card">
         <div class="card-header mb-3 d-flex justify-content-between align-items-center">
-            <h5 class="mb-0 px-2 ">Donation Policy/Tex Exemption</h5>
+            <h5 class="mb-0 px-2 ">Cta Buttons</h5>
             <small class="text-body float-end">
-                <a href="{{ route('donation-policy.create') }}" class="btn btn-primary">Create</a>
+                <a href="{{ route('cta.create') }}" class="btn btn-primary">Create</a>
             </small>
         </div>
         <div class="table-responsive text-nowrap">
@@ -13,7 +13,7 @@
                 <thead>
                     <tr>
                         <th>S.No</th>
-                        <th>Title</th>
+                        {{-- <th>Heading</th> --}}
                         <th>Page</th>
                         <th>Status</th>
                         <th>Actions</th>
@@ -24,16 +24,11 @@
                         @foreach ($records as $key => $record)
                             <tr>
                                 <td>{{ $key + 1 }}</td>
-                                <td>
-                                    {{ $record->title }}
-                                </td>
-                                <td>
-                                    <span>{{ ucwords(str_replace('_', ' ', $record->is_display)) }}</span>
-                                </td>
-
+                                {{-- <td> {{ $record->heading }}</td> --}}
+                               <td class="text-capitalize">{{ implode(', ', json_decode($record->is_display)) }}</td>
                                 <td>
                                     @if ($record->status == 1)
-                                        <form action="{{ route('donation-policy.status', $record->id) }}" method="POST">
+                                        <form action="{{ route('cta.status', $record->id) }}" method="POST">
                                             @csrf
                                             @method('PUT')
                                             <button type="button" class="btn btn-success badge btn-sm updateStatus"
@@ -42,7 +37,7 @@
                                             </button>
                                         </form>
                                     @else
-                                        <form action="{{ route('donation-policy.status', $record->id) }}" method="POST">
+                                        <form action="{{ route('cta.status', $record->id) }}" method="POST">
                                             @csrf
                                             @method('PUT')
                                             <button type="button" class="btn btn-danger badge btn-sm updateStatus"
@@ -54,12 +49,12 @@
                                 </td>
                                 <td>
                                     <div class="d-flex">
-                                        <a href="{{ route('donation-policy.edit', $record->id) }}" type="button"
+                                        <a href="{{ route('cta.edit', $record->id) }}" type="button"
                                             class="btn btn-outline-success btn-sm shadow-sm btn-flat mx-1"
                                             data-toggle="tooltip" data-placement="top" title="Edit Record">
                                             <i class="tf-icons bx bxs-edit"></i>
                                         </a>
-                                        <form action="{{ route('donation-policy.destroy', $record->id) }}" method="POST">
+                                        <form action="{{ route('cta.destroy', $record->id) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
                                             <button type="button"

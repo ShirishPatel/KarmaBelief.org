@@ -236,5 +236,30 @@
              }
          </style>
      </section>
+ @php
+        $record = DB::table('cta_buttons')->wherejsonContains('is_display', 'donate')->where('status', '1')->first();
+    @endphp
 
+    @if ($record && ($record->heading || $record->description || $record->btn_label || $record->btn_link))
+        <section class="book-area">
+            <div class="container">
+                <div class="book__wrp">
+                    <div class="book__item">
+                        <h2>{{ $record->heading ?? '' }}
+                        </h2>
+                        <p class="mt-20 mb-25">
+                            {{ $record->description ?? '' }}
+                        </p>
+                        <a href="{{ $record->btn_link ?? '#' }}"
+                            class="btn-two border-none ">{{ $record->btn_label ?? '' }}
+                            <span>
+                                <i class="fa-regular fa-arrow-up-right arry1"></i>
+                                <i class="fa-regular fa-arrow-up-right arry2"></i>
+                            </span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    @endif
  @endsection

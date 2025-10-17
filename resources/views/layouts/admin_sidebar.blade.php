@@ -186,13 +186,19 @@
                 </li> --}}
             </ul>
         </li>
-
+        <li class="menu-item  {{ Request::routeIs('cta.*') ? 'active' : '' }}">
+            <a href="{{ route('cta.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-category"></i>
+                <div class="text-truncate" data-i18n="cta">Cta Buttons</div>
+            </a>
+        </li>
         <li class="menu-item d-none  {{ Request::routeIs('about-inquiry.*') ? 'active' : '' }}">
             <a href="{{ route('about-inquiry.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-category"></i>
                 <div class="text-truncate" data-i18n="About Inquiry">Inquiry Section</div>
             </a>
         </li>
+
 
         <li class="menu-item {{ Request::routeIs('faq.*') ? 'active' : '' }}">
             <a href="{{ route('faq.index') }}" class="menu-link">
