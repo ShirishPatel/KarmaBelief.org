@@ -27,7 +27,8 @@ const galleryData = {
   ],
   'blood-donation-camps': [
     '07-Jan-2015 - Bangalore.jpg',
-    '25-Jun-2023 - Anand.jpeg'
+    '25-Jun-2023 - Anand.jpeg',
+    'IMG_20230625_122836.jpg'
   ],
   'clothes-distribution': [
     '1.jpg', '2.jpg', '3.jpg', 'IMG_20220710_092023.jpg', 'IMG_20220710_094322.jpg', 'IMG_20220710_094346.jpg',

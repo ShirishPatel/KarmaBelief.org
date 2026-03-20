@@ -28,6 +28,12 @@
     .lightbox-prev { left: 20px; top: 50%; transform: translateY(-50%); }
     .lightbox-next { right: 20px; top: 50%; transform: translateY(-50%); }
     #lightbox-caption { position: absolute; bottom: 40px; color: white; font-size: 1.1rem; }
+    .gallery-tab { padding: 12px 36px; border: none; background: none; cursor: pointer; font-size: 1.05rem; font-weight: 600; color: var(--color-text-muted); border-bottom: 3px solid transparent; transition: all 0.3s; }
+    .gallery-tab.active { color: var(--color-primary); border-bottom-color: var(--color-primary); }
+    .video-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.08); }
+    .video-wrap { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; }
+    .video-wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: none; }
+    .video-title { padding: 14px 16px; font-weight: 500; font-size: 0.95rem; margin: 0; }
   </style>
 </head>
 <body>
@@ -68,12 +74,20 @@
 
   <section class="section">
     <div class="container">
+      <div style="display: flex; justify-content: center; gap: 0; margin-bottom: 48px; border-bottom: 2px solid var(--color-border);">
+        <button id="tab-photo" class="gallery-tab active" onclick="switchTab('photo')">📷 Photo Gallery</button>
+        <button id="tab-video" class="gallery-tab" onclick="switchTab('video')">🎬 Video Gallery</button>
+      </div>
+
+      <div id="photo-gallery">
       <div class="filter-tabs">
         <button class="filter-btn active" data-filter="all">All</button>
         <button class="filter-btn" data-filter="tree-plantation">Tree Plantation</button>
         <button class="filter-btn" data-filter="blood-donation">Blood Donation</button>
         <button class="filter-btn" data-filter="clothes-distribution">Clothes Distribution</button>
-        <button class="filter-btn" data-filter="food-distribution">Food Distribution</button>
+        <button class="filter-btn" data-filter="food-distribution-01">Food Distribution 01</button>
+        <button class="filter-btn" data-filter="food-distribution-02">Food Distribution 02</button>
+        <button class="filter-btn" data-filter="food-distribution-03">Food Distribution 03</button>
       </div>
 
       <div class="gallery-grid" id="gallery-container">
@@ -82,6 +96,48 @@
       <div id="loading" style="text-align: center; padding: 40px; display: none;">
         <p style="font-size: 1.1rem; color: var(--color-primary);">Loading more images...</p>
       </div>
+      </div>
+
+      <div id="video-gallery" style="display: none;">
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 28px;">
+          <a class="video-card" href="https://www.youtube.com/watch?v=b3D542R6xII" target="_blank" rel="noopener">
+            <div class="video-wrap">
+              <img src="https://img.youtube.com/vi/b3D542R6xII/hqdefault.jpg" alt="Distributing Clothes">
+              <div class="video-play"><svg viewBox="0 0 68 48" xmlns="http://www.w3.org/2000/svg"><path d="M66.52 7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13 34 0 34 0S12.21.13 6.9 1.55c-2.93.78-4.63 3.26-5.42 6.19C.06 13.05 0 24 0 24s.06 10.95 1.48 16.26c.78 2.93 2.49 5.41 5.42 6.19C12.21 47.87 34 48 34 48s21.79-.13 27.1-1.55c2.93-.78 4.64-3.26 5.42-6.19C67.94 34.95 68 24 68 24s-.06-10.95-1.48-16.26z" fill="#ff0000"/><path d="M45 24 27 14v20" fill="#fff"/></svg></div>
+            </div>
+            <p class="video-title">Karma Belief Charitable Trust — Distributing Clothes</p>
+          </a>
+          <a class="video-card" href="https://www.youtube.com/watch?v=Pwym0OHE0iU" target="_blank" rel="noopener">
+            <div class="video-wrap">
+              <img src="https://img.youtube.com/vi/Pwym0OHE0iU/hqdefault.jpg" alt="Act Now. Do our Bit">
+              <div class="video-play"><svg viewBox="0 0 68 48" xmlns="http://www.w3.org/2000/svg"><path d="M66.52 7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13 34 0 34 0S12.21.13 6.9 1.55c-2.93.78-4.63 3.26-5.42 6.19C.06 13.05 0 24 0 24s.06 10.95 1.48 16.26c.78 2.93 2.49 5.41 5.42 6.19C12.21 47.87 34 48 34 48s21.79-.13 27.1-1.55c2.93-.78 4.64-3.26 5.42-6.19C67.94 34.95 68 24 68 24s-.06-10.95-1.48-16.26z" fill="#ff0000"/><path d="M45 24 27 14v20" fill="#fff"/></svg></div>
+            </div>
+            <p class="video-title">Karma Belief Charitable Trust — Act Now. Do our Bit</p>
+          </a>
+          <a class="video-card" href="https://www.youtube.com/watch?v=qzWzsRFGfsc" target="_blank" rel="noopener">
+            <div class="video-wrap">
+              <img src="https://img.youtube.com/vi/qzWzsRFGfsc/hqdefault.jpg" alt="Motivational Video">
+              <div class="video-play"><svg viewBox="0 0 68 48" xmlns="http://www.w3.org/2000/svg"><path d="M66.52 7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13 34 0 34 0S12.21.13 6.9 1.55c-2.93.78-4.63 3.26-5.42 6.19C.06 13.05 0 24 0 24s.06 10.95 1.48 16.26c.78 2.93 2.49 5.41 5.42 6.19C12.21 47.87 34 48 34 48s21.79-.13 27.1-1.55c2.93-.78 4.64-3.26 5.42-6.19C67.94 34.95 68 24 68 24s-.06-10.95-1.48-16.26z" fill="#ff0000"/><path d="M45 24 27 14v20" fill="#fff"/></svg></div>
+            </div>
+            <p class="video-title">Karma Belief Charitable Trust — Motivational Video</p>
+          </a>
+          <a class="video-card" href="https://www.youtube.com/watch?v=Fni0dY3homs" target="_blank" rel="noopener">
+            <div class="video-wrap">
+              <img src="https://img.youtube.com/vi/Fni0dY3homs/hqdefault.jpg" alt="NGO Ahmedabad Gujarat India">
+              <div class="video-play"><svg viewBox="0 0 68 48" xmlns="http://www.w3.org/2000/svg"><path d="M66.52 7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13 34 0 34 0S12.21.13 6.9 1.55c-2.93.78-4.63 3.26-5.42 6.19C.06 13.05 0 24 0 24s.06 10.95 1.48 16.26c.78 2.93 2.49 5.41 5.42 6.19C12.21 47.87 34 48 34 48s21.79-.13 27.1-1.55c2.93-.78 4.64-3.26 5.42-6.19C67.94 34.95 68 24 68 24s-.06-10.95-1.48-16.26z" fill="#ff0000"/><path d="M45 24 27 14v20" fill="#fff"/></svg></div>
+            </div>
+            <p class="video-title">Karma Belief Charitable Trust — NGO Ahmedabad Gujarat India</p>
+          </a>
+          <a class="video-card" href="https://www.youtube.com/watch?v=MI29OsjZLlA" target="_blank" rel="noopener">
+            <div class="video-wrap">
+              <img src="https://img.youtube.com/vi/MI29OsjZLlA/hqdefault.jpg" alt="Inspirational Video">
+              <div class="video-play"><svg viewBox="0 0 68 48" xmlns="http://www.w3.org/2000/svg"><path d="M66.52 7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13 34 0 34 0S12.21.13 6.9 1.55c-2.93.78-4.63 3.26-5.42 6.19C.06 13.05 0 24 0 24s.06 10.95 1.48 16.26c.78 2.93 2.49 5.41 5.42 6.19C12.21 47.87 34 48 34 48s21.79-.13 27.1-1.55c2.93-.78 4.64-3.26 5.42-6.19C67.94 34.95 68 24 68 24s-.06-10.95-1.48-16.26z" fill="#ff0000"/><path d="M45 24 27 14v20" fill="#fff"/></svg></div>
+            </div>
+            <p class="video-title">Karma Belief Charitable Trust — Inspirational Video</p>
+          </a>
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -150,6 +206,13 @@
   <script src="gallery-data.js"></script>
   <script src="assets/js/main.js"></script>
   <script>
+    function switchTab(tab) {
+      document.getElementById('photo-gallery').style.display = tab === 'photo' ? 'block' : 'none';
+      document.getElementById('video-gallery').style.display = tab === 'video' ? 'block' : 'none';
+      document.getElementById('tab-photo').classList.toggle('active', tab === 'photo');
+      document.getElementById('tab-video').classList.toggle('active', tab === 'video');
+    }
+
     // Dynamic gallery loader
     const galleryContainer = document.getElementById('gallery-container');
     const loadingIndicator = document.getElementById('loading');
@@ -161,9 +224,9 @@
         'tree-plantation': 'Tree Plantation',
         'blood-donation-camps': 'Blood Donation Camp',
         'clothes-distribution': 'Clothes Distribution',
-        'food-distribution-01': 'Food Distribution',
-        'food-distribution-02': 'Food Distribution',
-        'food-distribution-03': 'Food Distribution'
+        'food-distribution-01': 'Food Distribution 01',
+        'food-distribution-02': 'Food Distribution 02',
+        'food-distribution-03': 'Food Distribution 03'
       };
 
       Object.keys(galleryData).forEach(category => {
@@ -173,7 +236,7 @@
         if (category === 'blood-donation-camps') {
           displayCategory = 'blood-donation';
         } else if (category.startsWith('food-distribution')) {
-          displayCategory = 'food-distribution';
+          displayCategory = category;
         } else {
           displayCategory = category;
         }
