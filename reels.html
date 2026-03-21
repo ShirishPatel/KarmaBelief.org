@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Karma Motivational Reels | Karma Belief Charitable Trust</title>
+  <meta name="description" content="Watch motivational and inspirational reels by Karma Belief Charitable Trust. Spiritual wisdom, karma stories, and life lessons.">
+  <link rel="icon" type="image/png" href="favicon-32x32.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/main.css">
+  <style>
+    .reels-page {
+      min-height: 100vh;
+      background: #0a0a0f;
+      padding-top: 80px;
+    }
+
+    .reels-hero {
+      text-align: center;
+      padding: 48px 20px 32px;
+      background: linear-gradient(180deg, #0f172a 0%, #0a0a0f 100%);
+    }
+
+    .reels-hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      color: #fff;
+      margin-bottom: 10px;
+    }
+
+    .reels-hero h1 span {
+      color: #38BDF8;
+    }
+
+    .reels-hero p {
+      color: #94a3b8;
+      font-size: 1rem;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .reels-layout {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 24px;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px 60px;
+    }
+
+    /* ── Player ── */
+    .player-wrap {
+      position: sticky;
+      top: 90px;
+      height: calc(100vh - 110px);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .video-container {
+      flex: 1;
+      background: #000;
+      border-radius: 16px;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 0 60px rgba(14, 165, 233, 0.15);
+    }
+
+    .video-container video {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    /* play overlay */
+    .play-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+
+    .play-overlay.hidden { opacity: 0; pointer-events: none; }
+
+    .play-btn-big {
+      width: 72px;
+      height: 72px;
+      background: rgba(14, 165, 233, 0.85);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(4px);
+      transition: transform 0.2s;
+    }
+
+    .play-btn-big:hover { transform: scale(1.1); }
+
+    /* nav arrows */
+    .nav-arrows {
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .nav-arrow {
+      width: 40px;
+      height: 40px;
+      background: rgba(255,255,255,0.12);
+      border: none;
+      border-radius: 50%;
+      color: #fff;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(6px);
+      transition: background 0.2s;
+    }
+
+    .nav-arrow:hover { background: rgba(14, 165, 233, 0.6); }
+    .nav-arrow:disabled { opacity: 0.3; cursor: default; }
+
+    /* now playing info */
+    .now-playing {
+      background: #111827;
+      border-radius: 12px;
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .now-playing-num {
+      font-size: 0.75rem;
+      color: #38BDF8;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .now-playing-title {
+      color: #f1f5f9;
+      font-size: 0.95rem;
+      font-weight: 500;
+      flex: 1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* ── Playlist ── */
+    .playlist {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      max-height: calc(100vh - 110px);
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: #1e3a5f #0a0a0f;
+      padding-right: 4px;
+    }
+
+    .playlist-header {
+      color: #94a3b8;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0 4px 12px;
+      position: sticky;
+      top: 0;
+      background: #0a0a0f;
+      z-index: 1;
+    }
+
+    .playlist-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 14px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.18s;
+      border: 1px solid transparent;
+    }
+
+    .playlist-item:hover {
+      background: #111827;
+    }
+
+    .playlist-item.active {
+      background: #0c2340;
+      border-color: #0EA5E9;
+    }
+
+    .playlist-num {
+      font-size: 0.75rem;
+      color: #475569;
+      width: 20px;
+      text-align: center;
+      flex-shrink: 0;
+    }
+
+    .playlist-item.active .playlist-num {
+      color: #38BDF8;
+    }
+
+    .playlist-thumb {
+      width: 48px;
+      height: 48px;
+      background: #1e293b;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 1.3rem;
+    }
+
+    .playlist-item.active .playlist-thumb {
+      background: rgba(14, 165, 233, 0.15);
+    }
+
+    .playlist-info { flex: 1; min-width: 0; }
+
+    .playlist-title {
+      color: #e2e8f0;
+      font-size: 0.88rem;
+      font-weight: 500;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-bottom: 3px;
+    }
+
+    .playlist-item.active .playlist-title { color: #38BDF8; }
+
+    .playlist-tag {
+      font-size: 0.72rem;
+      color: #64748b;
+    }
+
+    .playing-indicator {
+      display: none;
+      gap: 3px;
+      align-items: flex-end;
+      height: 18px;
+    }
+
+    .playlist-item.active .playing-indicator { display: flex; }
+
+    .bar {
+      width: 3px;
+      background: #38BDF8;
+      border-radius: 2px;
+      animation: bounce 0.8s ease-in-out infinite alternate;
+    }
+
+    .bar:nth-child(2) { animation-delay: 0.2s; }
+    .bar:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes bounce {
+      from { height: 4px; }
+      to   { height: 16px; }
+    }
+
+    /* ── Mobile ── */
+    @media (max-width: 768px) {
+      .reels-layout {
+        grid-template-columns: 1fr;
+        padding: 0 12px 40px;
+      }
+
+      .player-wrap {
+        position: static;
+        height: auto;
+      }
+
+      .video-container {
+        height: 60vw;
+        min-height: 280px;
+      }
+
+      .playlist {
+        max-height: 320px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <a href="index.html" class="logo">
+        <img src="logo.png" alt="Karma Belief Logo">
+        <span>Karma Belief Charitable Trust®</span>
+      </a>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about-us.html">About Us</a></li>
+          <li><a href="causes.html">Causes</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="reels.html" class="active">Reels</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="contact-us.html">Contact</a></li>
+          <li><a href="donate.html" class="btn-donate">Donate</a></li>
+        </ul>
+      </nav>
+      <div class="hamburger"><span></span><span></span><span></span></div>
+    </div>
+  </header>
+
+  <div class="reels-page">
+    <div class="reels-hero">
+      <h1>Karma <span>Motivational</span> Reels</h1>
+      <p>Spiritual wisdom &amp; life lessons — one reel at a time 🙏</p>
+    </div>
+
+    <div class="reels-layout">
+
+      <!-- Player -->
+      <div class="player-wrap">
+        <div class="video-container" id="videoContainer">
+          <video id="mainVideo" preload="metadata" playsinline></video>
+
+          <div class="play-overlay" id="playOverlay">
+            <div class="play-btn-big">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+          </div>
+
+          <div class="nav-arrows">
+            <button class="nav-arrow" id="prevBtn" title="Previous">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>
+            </button>
+            <button class="nav-arrow" id="nextBtn" title="Next">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6z"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="now-playing">
+          <span class="now-playing-num" id="nowNum">1 / 17</span>
+          <span class="now-playing-title" id="nowTitle">Loading…</span>
+        </div>
+      </div>
+
+      <!-- Playlist -->
+      <div>
+        <div class="playlist-header">🎬 &nbsp;All Reels (17)</div>
+        <div class="playlist" id="playlist"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <div>
+        <div class="logo" style="margin-bottom:20px;">
+          <img src="logo.png" alt="Karma Belief Logo">
+          <span style="color:var(--color-primary-light);">Karma Belief Charitable Trust®</span>
+        </div>
+        <p style="font-style:italic;color:var(--color-text-muted);">Serving Humanity with Compassion Since 2019</p>
+      </div>
+      <div>
+        <h3>Quick Links</h3>
+        <ul style="list-style:none;">
+          <li style="margin-bottom:8px;"><a href="index.html">Home</a></li>
+          <li style="margin-bottom:8px;"><a href="about-us.html">About Us</a></li>
+          <li style="margin-bottom:8px;"><a href="causes.html">Causes</a></li>
+          <li style="margin-bottom:8px;"><a href="gallery.html">Gallery</a></li>
+          <li style="margin-bottom:8px;"><a href="reels.html">Reels</a></li>
+          <li style="margin-bottom:8px;"><a href="donate.html">Donate</a></li>
+          <li style="margin-bottom:8px;"><a href="contact-us.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Contact</h3>
+        <p style="margin-bottom:8px;">📍 B/806 Ashima Tower, Near Sandesh Press, Bodakdev, Ahmedabad – 380054</p>
+        <p style="margin-bottom:8px;">📞 +91 988 659 6789</p>
+        <p style="margin-bottom:8px;">📧 info@karmabelief.org</p>
+      </div>
+      <div>
+        <h3>Registration</h3>
+        <p style="margin-bottom:8px;">Reg #: E/22616/AHMEDABAD</p>
+        <p style="margin-bottom:8px;">NGO Darpan: GJ/2019/0240259</p>
+        <p style="margin-bottom:8px;">PAN: AAETK0087F</p>
+        <p>80G &amp; 12AB Certified</p>
+      </div>
+    </div>
+    <div class="copyright">
+      <p>Copyright © 2019-2026 Karma Belief Charitable Trust | All Rights Reserved</p>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+  <script>
+    const reels = [
+      { file: "gaur gopal das 01.mp4",              title: "Gaur Gopal Das",                  tag: "Spiritual Wisdom",    icon: "🙏" },
+      { file: "gaur gopal das 02.mp4",              title: "Gaur Gopal Das – Part 2",         tag: "Spiritual Wisdom",    icon: "🙏" },
+      { file: "insaan bhool jata hai.mp4",           title: "Insaan Bhool Jata Hai",           tag: "Life Lesson",         icon: "💭" },
+      { file: "jivan ka sidha sa niyam hai.mp4",     title: "Jivan Ka Sidha Sa Niyam Hai",     tag: "Life Lesson",         icon: "✨" },
+      { file: "kabhi bhi kisi aansu ki wajah mat bano.mp4", title: "Kabhi Kisi Aansu Ki Wajah Mat Bano", tag: "Compassion", icon: "💧" },
+      { file: "karma gujarati.mp4",                  title: "Karma – Gujarati",                tag: "Karma Stories",       icon: "🌸" },
+      { file: "karma stories.mp4",                   title: "Karma Stories",                   tag: "Karma Stories",       icon: "📖" },
+      { file: "kisi ki aatma mat dukhao.mp4",        title: "Kisi Ki Aatma Mat Dukhao",        tag: "Compassion",          icon: "❤️" },
+      { file: "mahadev.mp4",                         title: "Mahadev",                         tag: "Devotion",            icon: "🕉️" },
+      { file: "muni shri aaditya sagar ji.mp4",      title: "Muni Shri Aaditya Sagar Ji",      tag: "Spiritual Wisdom",    icon: "🙏" },
+      { file: "premanand ji maharaj.mp4",            title: "Premanand Ji Maharaj",            tag: "Devotion",            icon: "🕉️" },
+      { file: "rj kartik.mp4",                       title: "RJ Kartik",                       tag: "Motivation",          icon: "🎙️" },
+      { file: "shri krishna kehte hain 01.mp4",      title: "Shri Krishna Kehte Hain – 1",     tag: "Krishna Wisdom",      icon: "🪈" },
+      { file: "shri krishna kehte hain 02.mp4",      title: "Shri Krishna Kehte Hain – 2",     tag: "Krishna Wisdom",      icon: "🪈" },
+      { file: "shri krishna kehte hain 03.mp4",      title: "Shri Krishna Kehte Hain – 3",     tag: "Krishna Wisdom",      icon: "🪈" },
+      { file: "shri krishna kehte hain 04.mp4",      title: "Shri Krishna Kehte Hain – 4",     tag: "Krishna Wisdom",      icon: "🪈" },
+      { file: "shri krishna kehte hain 05.mp4",      title: "Shri Krishna Kehte Hain – 5",     tag: "Krishna Wisdom",      icon: "🪈" },
+    ];
+
+    let current = 0;
+    const video    = document.getElementById('mainVideo');
+    const overlay  = document.getElementById('playOverlay');
+    const prevBtn  = document.getElementById('prevBtn');
+    const nextBtn  = document.getElementById('nextBtn');
+    const nowNum   = document.getElementById('nowNum');
+    const nowTitle = document.getElementById('nowTitle');
+    const playlist = document.getElementById('playlist');
+
+    function loadReel(index) {
+      current = index;
+      const r = reels[index];
+      video.src = `assets/videos/${r.file}`;
+      video.load();
+      video.play().catch(() => {});
+      overlay.classList.add('hidden');
+      nowNum.textContent   = `${index + 1} / ${reels.length}`;
+      nowTitle.textContent = r.title;
+      prevBtn.disabled = index === 0;
+      nextBtn.disabled = index === reels.length - 1;
+
+      // update playlist highlight & scroll into view
+      document.querySelectorAll('.playlist-item').forEach((el, i) => {
+        el.classList.toggle('active', i === index);
+        if (i === index) el.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      });
+    }
+
+    // Build playlist
+    reels.forEach((r, i) => {
+      const item = document.createElement('div');
+      item.className = 'playlist-item';
+      item.innerHTML = `
+        <span class="playlist-num">${i + 1}</span>
+        <div class="playlist-thumb">${r.icon}</div>
+        <div class="playlist-info">
+          <div class="playlist-title">${r.title}</div>
+          <div class="playlist-tag">${r.tag}</div>
+        </div>
+        <div class="playing-indicator">
+          <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+        </div>`;
+      item.addEventListener('click', () => loadReel(i));
+      playlist.appendChild(item);
+    });
+
+    // Controls
+    overlay.addEventListener('click', () => { video.play(); overlay.classList.add('hidden'); });
+    video.addEventListener('pause',   () => overlay.classList.remove('hidden'));
+    video.addEventListener('play',    () => overlay.classList.add('hidden'));
+    video.addEventListener('ended',   () => { if (current < reels.length - 1) loadReel(current + 1); });
+    prevBtn.addEventListener('click', () => { if (current > 0) loadReel(current - 1); });
+    nextBtn.addEventListener('click', () => { if (current < reels.length - 1) loadReel(current + 1); });
+
+    // Keyboard navigation
+    document.addEventListener('keydown', e => {
+      if (e.key === 'ArrowUp'   || e.key === 'ArrowLeft')  { if (current > 0) loadReel(current - 1); }
+      if (e.key === 'ArrowDown' || e.key === 'ArrowRight') { if (current < reels.length - 1) loadReel(current + 1); }
+      if (e.key === ' ') { e.preventDefault(); video.paused ? video.play() : video.pause(); }
+    });
+
+    loadReel(0);
+  </script>
+</body>
+</html>
