@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Karma Quotes | Wisdom & Inspiration | Karma Belief</title>
+  <meta name="description" content="Explore inspiring karma quotes about justice, compassion, consequences, and personal responsibility. Find wisdom from spiritual leaders, philosophers, and modern thinkers.">
+  <link rel="icon" type="image/png" href="favicon-32x32.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/main.css">
+  <link rel="stylesheet" href="assets/css/animations.css">
+  <meta property="og:title" content="Karma Quotes | Wise Words on Karma & Life">
+  <meta property="og:description" content="Explore inspiring karma quotes about justice, compassion, and personal responsibility">
+  <meta property="og:url" content="https://www.karmabelief.org/karma-quotes.html">
+  <meta property="og:type" content="website">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Karma Quotes",
+    "description": "Explore inspiring karma quotes about justice, compassion, consequences, and personal responsibility",
+    "url": "https://www.karmabelief.org/karma-quotes.html",
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "Karma Belief Charitable Trust",
+      "url": "https://www.karmabelief.org"
+    }
+  }
+  </script>
+  <style>
+    .quotes-filter-section {
+      background-color: var(--color-bg);
+      padding: 40px 0;
+      margin-bottom: 60px;
+    }
+
+    .filter-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+
+    .filter-label {
+      font-weight: 600;
+      color: var(--color-text-dark);
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+    }
+
+    .filter-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .filter-btn {
+      padding: 8px 16px;
+      border: 2px solid var(--color-border);
+      background-color: var(--color-bg-card);
+      color: var(--color-text-dark);
+      border-radius: 20px;
+      cursor: pointer;
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+    }
+
+    .filter-btn:hover {
+      border-color: var(--color-primary);
+      color: var(--color-primary);
+    }
+
+    .filter-btn.active {
+      background-color: var(--color-primary);
+      color: white;
+      border-color: var(--color-primary);
+    }
+
+    .reset-filters {
+      padding: 8px 16px;
+      background-color: transparent;
+      color: var(--color-primary);
+      border: 2px solid var(--color-primary);
+      border-radius: 20px;
+      cursor: pointer;
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+    }
+
+    .reset-filters:hover {
+      background-color: var(--color-primary);
+      color: white;
+    }
+
+    .quotes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 30px;
+      margin-bottom: 60px;
+    }
+
+    .quote-card {
+      background-color: var(--color-bg-card);
+      border-left: 5px solid var(--color-primary);
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      opacity: 1;
+      animation: fadeIn 0.5s ease;
+    }
+
+    .quote-card.hidden {
+      display: none;
+    }
+
+    .quote-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+    }
+
+    .quote-card.justice { border-left-color: #C8570A; }
+    .quote-card.compassion { border-left-color: #2B6049; }
+    .quote-card.action { border-left-color: #D4A017; }
+    .quote-card.consequences { border-left-color: #8B4513; }
+    .quote-card.forgiveness { border-left-color: #4A8F68; }
+    .quote-card.materialism { border-left-color: #E8813A; }
+
+    .quote-text {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      color: var(--color-text-dark);
+      margin-bottom: 15px;
+      line-height: 1.6;
+      font-style: italic;
+    }
+
+    .quote-author {
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      color: var(--color-primary);
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .quote-category {
+      display: inline-block;
+      background-color: var(--color-bg);
+      color: var(--color-text-dark);
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      margin-top: auto;
+    }
+
+    .no-results {
+      text-align: center;
+      padding: 60px 20px;
+      font-family: var(--font-body);
+      color: var(--color-text-muted);
+      font-size: 1.1rem;
+    }
+
+    .filter-results-info {
+      text-align: center;
+      margin-bottom: 30px;
+      font-family: var(--font-body);
+      color: var(--color-text-muted);
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 768px) {
+      .filter-container {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .filter-group {
+        width: 100%;
+      }
+
+      .quotes-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .quote-text {
+        font-size: 1rem;
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <a href="index.html" class="logo">
+        <img src="logo.png" alt="Karma Belief Logo">
+        <span>Karma Belief Charitable Trust®</span>
+      </a>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about-us.html">About Us</a></li>
+          <li><a href="causes.html">Causes</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="reels.html">Reels</a></li>
+          <li><a href="karma-quotes.html" class="active">Quotes</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="contact-us.html">Contact</a></li>
+          <li><a href="donate.html" class="btn-donate">Donate</a></li>
+        </ul>
+      </nav>
+      <div class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero" style="height: 50vh; background-image: url('images/bg_3.jpg');">
+    <div class="hero-content">
+      <div class="breadcrumb" style="color: rgba(255,255,255,0.8); padding: 0;">
+        <a href="index.html" style="color: white;">Home</a> > Karma Quotes
+      </div>
+      <h1 style="font-size: 3.5rem;">Karma Quotes</h1>
+      <p style="font-size: 1.2rem; margin-top: 20px; color: rgba(255,255,255,0.9);">Wisdom & Inspiration On Life, Justice & Personal Responsibility</p>
+    </div>
+  </section>
+
+  <section class="quotes-filter-section">
+    <div class="container">
+      <div class="filter-container">
+        <span class="filter-label">Filter by Category:</span>
+        <div class="filter-group">
+          <button class="filter-btn active" data-filter="all">All Quotes</button>
+          <button class="filter-btn" data-filter="justice">Justice</button>
+          <button class="filter-btn" data-filter="compassion">Compassion</button>
+          <button class="filter-btn" data-filter="action">Action</button>
+          <button class="filter-btn" data-filter="consequences">Consequences</button>
+          <button class="filter-btn" data-filter="forgiveness">Forgiveness</button>
+          <button class="filter-btn" data-filter="materialism">Greed</button>
+        </div>
+      </div>
+
+      <div style="border-top: 1px solid var(--color-border); padding-top: 30px; margin-top: 30px;">
+        <div class="filter-container">
+          <span class="filter-label">Filter by Author:</span>
+          <div class="filter-group" id="author-filters">
+            <button class="filter-btn active" data-author="all">All Authors</button>
+          </div>
+          <button class="reset-filters" onclick="resetAllFilters()">Reset All Filters</button>
+        </div>
+      </div>
+
+      <div class="filter-results-info" id="filter-info"></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="quotes-grid" id="quotes-container">
+        <!-- Quotes will be dynamically inserted here by JavaScript -->
+      </div>
+      <div class="no-results" id="no-results" style="display: none;">
+        No quotes found matching your filters. Try adjusting your selection.
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; margin-bottom: 40px;">
+        <div>
+          <h4 style="font-family: var(--font-display); color: var(--color-primary); margin-bottom: 15px;">Karma Belief</h4>
+          <p style="color: var(--color-text-body); line-height: 1.6;">Serving Humanity with Compassion Since 2019. An Ahmedabad-based volunteer-driven NGO.</p>
+          <div style="margin-top: 20px; display: flex; gap: 15px;">
+            <a href="https://www.facebook.com/karmabeliefcharitabletrust/" target="_blank" style="color: var(--color-primary); text-decoration: none; font-weight: 600;">Facebook</a>
+          </div>
+        </div>
+        <div>
+          <h4 style="font-family: var(--font-display); color: var(--color-primary); margin-bottom: 15px;">Quick Links</h4>
+          <ul style="list-style: none; padding: 0;">
+            <li style="margin-bottom: 8px;"><a href="index.html" style="color: var(--color-text-body); text-decoration: none;">Home</a></li>
+            <li style="margin-bottom: 8px;"><a href="about-us.html" style="color: var(--color-text-body); text-decoration: none;">About Us</a></li>
+            <li style="margin-bottom: 8px;"><a href="causes.html" style="color: var(--color-text-body); text-decoration: none;">Our Causes</a></li>
+            <li style="margin-bottom: 8px;"><a href="gallery.html" style="color: var(--color-text-body); text-decoration: none;">Gallery</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 style="font-family: var(--font-display); color: var(--color-primary); margin-bottom: 15px;">Contact</h4>
+          <p style="color: var(--color-text-body); margin-bottom: 8px;"><strong>Phone:</strong> +91 9886596789</p>
+          <p style="color: var(--color-text-body); margin-bottom: 8px;"><strong>Email:</strong> info@karmabelief.org</p>
+          <p style="color: var(--color-text-body); margin-bottom: 15px;"><strong>Address:</strong> B/806 Ashima Tower, Bodakdev, Ahmedabad 380054</p>
+        </div>
+      </div>
+      <div style="border-top: 1px solid var(--color-border); padding-top: 20px; text-align: center; color: var(--color-text-muted); font-size: 0.9rem;">
+        <p>Registration # E/22616/AHMEDABAD | NGO Darpan # GJ/2019/0240259 | PAN: AAETK0087F</p>
+        <p style="margin-top: 10px;">© 2019-2026 Karma Belief Charitable Trust. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/karma-quotes.js"></script>
+</body>
+</html>

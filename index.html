@@ -40,6 +40,27 @@
     ]
   }
   </script>
+  <style>
+    .slogan-rotator { display: block; }
+    .slogan-rotator .slogan {
+      display: block;
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+      pointer-events: none;
+    }
+    .slogan-rotator .slogan.active {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+    .slogan-rotator .slogan.exit {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+  </style>
 </head>
 <body>
   <header>
@@ -54,8 +75,7 @@
           <li><a href="about-us.html">About Us</a></li>
           <li><a href="causes.html">Causes</a></li>
           <li><a href="gallery.html">Gallery</a></li>
-          <li><a href="reels.html">Reels</a></li>
-          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="reels.html">Reels</a></li>          <li><a href="karma-quotes.html">Quotes</a></li>          <li><a href="faq.html">FAQ</a></li>
           <li><a href="contact-us.html">Contact</a></li>
           <li><a href="donate.html" class="btn-donate">Donate</a></li>
         </ul>
@@ -72,7 +92,15 @@
     <div class="hero-bg"></div>
     <div class="hero-content">
       <h1 class="fade-up">Karma Belief Charitable Trust</h1>
-      <h2 class="fade-up delay-1" style="font-family: var(--font-display); font-size: 2rem; font-weight: 400; margin-bottom: 1rem;">Serving Humanity with Compassion Since 2019</h2>
+      <div class="fade-up delay-1 slogan-rotator" style="font-family: var(--font-display); font-size: 2rem; font-weight: 400; margin-bottom: 1rem; min-height: 2.8rem; position: relative; overflow: hidden;">
+        <span class="slogan active">Serving Humanity with Compassion Since 2019</span>
+        <span class="slogan">What goes around comes around, both good and bad.</span>
+        <span class="slogan">The best way to get love is to give it.</span>
+        <span class="slogan">Do unto others as you would have them do to you.</span>
+        <span class="slogan">You get back the same energy you put out.</span>
+        <span class="slogan">A tiny change today brings a dramatically different tomorrow.</span>
+        <span class="slogan">When you're feeling optimistic and happy, everyone in your orbit immediately feels it!</span>
+      </div>
       <p class="fade-up delay-2">A volunteer-driven NGO based in Ahmedabad, working for education, environment, women empowerment, and community welfare.</p>
       <div class="hero-ctas fade-up delay-3">
         <a href="donate.html" class="btn-donate">Donate Now</a>
@@ -297,5 +325,19 @@
   </footer>
 
   <script src="assets/js/main.js"></script>
+  <script>
+    (function () {
+      var slogans = document.querySelectorAll('.slogan-rotator .slogan');
+      if (!slogans.length) return;
+      var current = 0;
+      setInterval(function () {
+        slogans[current].classList.add('exit');
+        slogans[current].classList.remove('active');
+        current = (current + 1) % slogans.length;
+        slogans[current].classList.remove('exit');
+        slogans[current].classList.add('active');
+      }, 3500);
+    })();
+  </script>
 </body>
 </html>

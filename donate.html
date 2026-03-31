@@ -25,6 +25,7 @@
           <li><a href="causes.html">Causes</a></li>
           <li><a href="gallery.html">Gallery</a></li>
           <li><a href="reels.html">Reels</a></li>
+          <li><a href="karma-quotes.html">Quotes</a></li>
           <li><a href="faq.html">FAQ</a></li>
           <li><a href="contact-us.html">Contact</a></li>
           <li><a href="donate.html" class="btn-donate active">Donate</a></li>
@@ -63,6 +64,117 @@
           <div style="font-size: 3rem; margin-bottom: 16px;">✅</div>
           <h3 style="font-family: var(--font-display); font-size: 1.6rem; margin-bottom: 12px;">Transparent & Certified</h3>
           <p>Registered with NITI Aayog, certified under 12AB and 80G. Full transparency and accountability in all our operations.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Make Your Own Day of Charity -->
+  <section class="section reveal" style="background: linear-gradient(135deg, rgba(43,96,73,0.06) 0%, rgba(200,87,10,0.06) 100%);">
+    <div class="container">
+      <div style="max-width: 860px; margin: 0 auto;">
+        <div style="text-align: center; margin-bottom: 16px;">
+          <span style="display: inline-block; background: var(--color-gold); color: white; font-size: 0.8rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; padding: 6px 18px; border-radius: 20px;">Special Occasions</span>
+        </div>
+        <h2 class="section-title" style="text-align: center;">Make Your Own Day of Charity</h2>
+        <p style="text-align: center; font-size: 1.15rem; color: var(--color-text-muted); max-width: 640px; margin: 0 auto 16px;">
+          The most meaningful celebrations are the ones that touch someone else's life. Mark your special day by spreading joy among those who need your care and support the most — and create a memory that truly lasts.
+        </p>
+        <p style="text-align: center; font-size: 1rem; color: var(--color-text-muted); margin-bottom: 48px;">
+          Whether it's a birthday, anniversary, or a tribute to someone dear — your goodwill becomes a gift that keeps giving.
+        </p>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 48px;">
+          <div class="card" style="text-align: center; padding: 28px 20px; border-top: 3px solid var(--color-gold);">
+            <div style="font-size: 2.2rem; margin-bottom: 12px;">🎂</div>
+            <h4 style="font-weight: 600; margin-bottom: 8px;">Birthday Celebration</h4>
+            <p style="font-size: 0.9rem; color: var(--color-text-muted);">Turn your birthday into a day of giving. Feed a family, plant a tree, or sponsor a child's education.</p>
+          </div>
+          <div class="card" style="text-align: center; padding: 28px 20px; border-top: 3px solid var(--color-primary);">
+            <div style="font-size: 2.2rem; margin-bottom: 12px;">💍</div>
+            <h4 style="font-weight: 600; margin-bottom: 8px;">Anniversary Celebration</h4>
+            <p style="font-size: 0.9rem; color: var(--color-text-muted);">Celebrate your love story by writing a new chapter of hope for someone in need.</p>
+          </div>
+          <div class="card" style="text-align: center; padding: 28px 20px; border-top: 3px solid var(--color-gold);">
+            <div style="font-size: 2.2rem; margin-bottom: 12px;">🌟</div>
+            <h4 style="font-weight: 600; margin-bottom: 8px;">In Honour Of</h4>
+            <p style="font-size: 0.9rem; color: var(--color-text-muted);">Celebrate a loved one's achievement, milestone, or legacy with a donation in their name.</p>
+          </div>
+          <div class="card" style="text-align: center; padding: 28px 20px; border-top: 3px solid var(--color-primary);">
+            <div style="font-size: 2.2rem; margin-bottom: 12px;">🕊️</div>
+            <h4 style="font-weight: 600; margin-bottom: 8px;">In Memory Of</h4>
+            <p style="font-size: 0.9rem; color: var(--color-text-muted);">Keep their spirit alive by doing good in their name. A tribute that brings light to others.</p>
+          </div>
+        </div>
+
+        <div class="card" style="padding: 48px 40px; box-shadow: 0 8px 40px rgba(0,0,0,0.1);">
+          <h3 style="font-family: var(--font-display); font-size: 1.8rem; text-align: center; margin-bottom: 8px;">Dedicate Your Donation</h3>
+          <p style="text-align: center; color: var(--color-text-muted); margin-bottom: 36px; font-size: 0.95rem;">Fill in the details below and we'll send you a personalised dedication certificate.</p>
+
+          <form id="occasion-donation-form" onsubmit="handleOccasionDonation(event)" novalidate>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px;">
+              <div style="grid-column: 1 / -1;">
+                <label for="occasion-type" style="display: block; font-weight: 600; margin-bottom: 8px; font-size: 0.95rem;">Choose an Occasion <span style="color: var(--color-primary);">*</span></label>
+                <select id="occasion-type" name="occasion-type" required style="width: 100%; padding: 14px 16px; border: 1.5px solid #ddd; border-radius: 8px; font-size: 1rem; font-family: var(--font-body); background: white; color: var(--color-text-dark); cursor: pointer;">
+                  <option value="" disabled selected>-- Select an occasion --</option>
+                  <option value="birthday">🎂 Birthday Celebration</option>
+                  <option value="anniversary">💍 Anniversary Celebration</option>
+                  <option value="honour">🌟 In Honour Of</option>
+                  <option value="memory">🕊️ In Memory Of</option>
+                </select>
+              </div>
+
+              <div>
+                <label for="occasion-name" style="display: block; font-weight: 600; margin-bottom: 8px; font-size: 0.95rem;">Name <span style="color: var(--color-primary);">*</span></label>
+                <input type="text" id="occasion-name" name="occasion-name" placeholder="Name to be honoured / remembered" required style="width: 100%; padding: 14px 16px; border: 1.5px solid #ddd; border-radius: 8px; font-size: 1rem; font-family: var(--font-body); box-sizing: border-box;">
+              </div>
+
+              <div>
+                <label for="occasion-date" style="display: block; font-weight: 600; margin-bottom: 8px; font-size: 0.95rem;">Occasion Date <span style="color: var(--color-primary);">*</span></label>
+                <input type="date" id="occasion-date" name="occasion-date" required style="width: 100%; padding: 14px 16px; border: 1.5px solid #ddd; border-radius: 8px; font-size: 1rem; font-family: var(--font-body); box-sizing: border-box;">
+              </div>
+
+              <div>
+                <label for="donor-name" style="display: block; font-weight: 600; margin-bottom: 8px; font-size: 0.95rem;">Your Name <span style="color: var(--color-primary);">*</span></label>
+                <input type="text" id="donor-name" name="donor-name" placeholder="Your full name" required style="width: 100%; padding: 14px 16px; border: 1.5px solid #ddd; border-radius: 8px; font-size: 1rem; font-family: var(--font-body); box-sizing: border-box;">
+              </div>
+
+              <div>
+                <label for="donor-email" style="display: block; font-weight: 600; margin-bottom: 8px; font-size: 0.95rem;">Your Email <span style="color: var(--color-primary);">*</span></label>
+                <input type="email" id="donor-email" name="donor-email" placeholder="For dedication certificate" required style="width: 100%; padding: 14px 16px; border: 1.5px solid #ddd; border-radius: 8px; font-size: 1rem; font-family: var(--font-body); box-sizing: border-box;">
+              </div>
+
+              <div>
+                <label for="donation-amount" style="display: block; font-weight: 600; margin-bottom: 8px; font-size: 0.95rem;">Donation Amount (₹) <span style="color: var(--color-primary);">*</span></label>
+                <input type="number" id="donation-amount" name="donation-amount" placeholder="Enter amount in ₹" min="100" required style="width: 100%; padding: 14px 16px; border: 1.5px solid #ddd; border-radius: 8px; font-size: 1rem; font-family: var(--font-body); box-sizing: border-box;">
+              </div>
+
+              <div style="grid-column: 1 / -1;">
+                <label style="display: block; font-weight: 600; margin-bottom: 12px; font-size: 0.95rem;">Quick Amount</label>
+                <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+                  <button type="button" onclick="setAmount(501)" style="padding: 10px 20px; border: 1.5px solid var(--color-primary); background: white; color: var(--color-primary); border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 0.95rem; transition: all 0.2s;">₹501</button>
+                  <button type="button" onclick="setAmount(1001)" style="padding: 10px 20px; border: 1.5px solid var(--color-primary); background: white; color: var(--color-primary); border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 0.95rem; transition: all 0.2s;">₹1,001</button>
+                  <button type="button" onclick="setAmount(2100)" style="padding: 10px 20px; border: 1.5px solid var(--color-primary); background: white; color: var(--color-primary); border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 0.95rem; transition: all 0.2s;">₹2,100</button>
+                  <button type="button" onclick="setAmount(5100)" style="padding: 10px 20px; border: 1.5px solid var(--color-primary); background: white; color: var(--color-primary); border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 0.95rem; transition: all 0.2s;">₹5,100</button>
+                  <button type="button" onclick="setAmount(11000)" style="padding: 10px 20px; border: 1.5px solid var(--color-primary); background: white; color: var(--color-primary); border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 0.95rem; transition: all 0.2s;">₹11,000</button>
+                </div>
+              </div>
+
+              <div style="grid-column: 1 / -1;">
+                <label for="occasion-message" style="display: block; font-weight: 600; margin-bottom: 8px; font-size: 0.95rem;">Personal Message <span style="color: var(--color-text-muted); font-weight: 400;">(optional)</span></label>
+                <textarea id="occasion-message" name="occasion-message" rows="3" placeholder="Add a heartfelt message to accompany your dedication..." style="width: 100%; padding: 14px 16px; border: 1.5px solid #ddd; border-radius: 8px; font-size: 1rem; font-family: var(--font-body); resize: vertical; box-sizing: border-box;"></textarea>
+              </div>
+            </div>
+
+            <div id="occasion-form-msg" style="display:none; padding: 14px 18px; border-radius: 8px; margin-bottom: 20px; font-size: 0.95rem;"></div>
+
+            <div style="text-align: center;">
+              <button type="submit" class="btn-primary" style="padding: 16px 48px; font-size: 1.1rem; border: none; cursor: pointer; border-radius: 8px;">
+                🎁 Donate Now
+              </button>
+              <p style="margin-top: 16px; font-size: 0.85rem; color: var(--color-text-muted);">After submitting, please complete your bank transfer using the details below. We'll send your dedication certificate once the donation is confirmed.</p>
+            </div>
+          </form>
         </div>
       </div>
     </div>
@@ -239,5 +351,55 @@
   </footer>
 
   <script src="assets/js/main.js"></script>
+  <script>
+    function setAmount(val) {
+      document.getElementById('donation-amount').value = val;
+    }
+
+    function handleOccasionDonation(e) {
+      e.preventDefault();
+      const form = e.target;
+      const msg = document.getElementById('occasion-form-msg');
+      const occasion = form['occasion-type'].value;
+      const name = form['occasion-name'].value.trim();
+      const date = form['occasion-date'].value;
+      const donorName = form['donor-name'].value.trim();
+      const email = form['donor-email'].value.trim();
+      const amount = form['donation-amount'].value;
+
+      if (!occasion || !name || !date || !donorName || !email || !amount) {
+        msg.style.display = 'block';
+        msg.style.background = '#fff3cd';
+        msg.style.color = '#856404';
+        msg.style.border = '1px solid #ffc107';
+        msg.textContent = 'Please fill in all required fields before proceeding.';
+        return;
+      }
+
+      const occasionLabels = {
+        birthday: 'Birthday Celebration',
+        anniversary: 'Anniversary Celebration',
+        honour: 'In Honour Of',
+        memory: 'In Memory Of'
+      };
+
+      const subject = encodeURIComponent(`Occasion Donation – ${occasionLabels[occasion]} for ${name}`);
+      const body = encodeURIComponent(
+        `Dear Karma Belief Team,\n\nI would like to make a donation for the following occasion:\n\n` +
+        `Occasion: ${occasionLabels[occasion]}\nName: ${name}\nDate: ${date}\n` +
+        `Donor Name: ${donorName}\nDonor Email: ${email}\nAmount: ₹${amount}\n` +
+        (form['occasion-message'].value.trim() ? `\nMessage: ${form['occasion-message'].value.trim()}\n` : '') +
+        `\nI will complete the bank transfer shortly and attach the receipt.\n\nThank you.`
+      );
+
+      msg.style.display = 'block';
+      msg.style.background = '#d4edda';
+      msg.style.color = '#155724';
+      msg.style.border = '1px solid #28a745';
+      msg.innerHTML = `Thank you, ${donorName}! Please complete your bank transfer using the details below, then <a href="mailto:info@karmabelief.org?subject=${subject}&body=${body}" style="color: var(--color-primary); font-weight:600;">click here to email us your receipt</a> and we'll send your dedication certificate.`;
+
+      form.reset();
+    }
+  </script>
 </body>
 </html>
